@@ -1,0 +1,115 @@
+module addertest (
+    input clk,  // clock
+    input rst,  // reset
+    output out[16],
+    output z,
+    output v,
+    output n,
+    output checkoff[8], // is current correct????
+    output err[8], // output the flags for this error
+    output err_s[16]
+   ) {
+    // declare modules and constants 
+    sixteen_bit_full_adder fa;
+    // register to hold results of test conditions 
+    // each 0th bit is 1 if 0th test is correct
+    dff checkoff_reg[8](#INIT(0), .clk(clk), .rst(rst));
+    // error state
+    dff error_reg[8](#INIT(0), .clk(clk), .rst(rst));
+    // error s 
+    dff error_s_reg[16](#INIT(0), .clk(clk), .rst(rst));
+    // PC 
+    dff counter[3](.clk(clk), .rst(rst));
+
+    fsm y_controller(.clk(clk), .rst(rst)) = {START,ERROR,END};
+    //P+P no flag
+    //P-P N flag
+    //P+N no flag
+    //P+P V flag
+    //P-P Z flag
+    //ERROR all values are wrong
+    // constants test conditions
+    const SUMORSUB = {0,1,0,0,1,0};
+    const X_VALUES = {16h5e94,16h1a4d,16h2ff3,16h0001,16h0001,16h0001};
+    const Y_VALUES = {16h132f,16h34ff,16h9f22,16h7FFF,16h0001,16h0001};
+
+    // correct answers
+    const S_VALUES = {16h71c3,16he54e,16hcf15,16h8000,16h0000};
+    const Z_VALUES = {0,0,0,0,1,0};
+    const V_VALUES = {0,0,0,1,0,1};
+    const N_VALUES = {0,1,0,0,0,1};
+    
+    // length of values
+    const length = 3b110;
+    
+
+ always {
+    // q is out and d is input
+    // declare connections for fa
+    fa.op = SUMORSUB[counter.q];
+    fa.y[15:0] = Y_VALUES[counter.q]; 
+    fa.x[15:0] = X_VALUES[counter.q]; 
+    
+  
+    
+    z = fa.z; //all zeroes
+    v = fa.v; // overflow flag
+    n = fa.n; // is negative
+    out = fa.s; // sum value
+    
+    // output the values of registers each CLK so we can use leds to read them
+    checkoff = checkoff_reg.q;
+    err = error_reg.q;
+    err_s = error_s_reg.q;
+   
+    // fsm to check the values 
+    case(y_controller.q){
+      // we start checking
+      y_controller.START:
+      // check the flags and sum for the set for counter.q
+      if (fa.s == S_VALUES[counter.q] && fa.z == Z_VALUES[counter.q] && fa.v == V_VALUES[counter.q] && fa.n == N_VALUES[counter.q]){
+        // light up bit if value is correct
+        checkoff_reg.d[counter.q] = 1;
+        // if correct move on to the next one
+        y_controller.d = y_controller.START;
+      } else {
+        // we want to capture all the values in the error 
+        // so we capture the states of right to left z,v,n,s in error_reg
+        // so reading from the register we can output the states for us to see
+        error_reg.d[0] = (fa.z != Z_VALUES[counter.q]);
+        error_reg.d[1] = (fa.v != V_VALUES[counter.q]);
+        error_reg.d[2] = (fa.n != N_VALUES[counter.q]);
+        error_reg.d[3] = (fa.s != S_VALUES[counter.q]);      
+        error_s_reg.d = fa.s;  
+        y_controller.d = y_controller.ERROR;
+      }      
+      // if counter reaches end of list
+      if (counter.q == length){
+        y_controller.d = y_controller.END;
+      }        
+      y_controller.ERROR:
+        // if error, stop at error. 
+        y_controller.d = y_controller.ERROR;
+      y_controller.END:
+      checkoff = checkoff_reg.q;
+        // if reach end, stop at end
+        // clear any possible errors - we do not want to see any errors. if we have success fully reached the end state
+        error_s_reg.d = 16h0000;
+        error_reg.d[3:0] = 4x{0};
+        err = error_reg.q;
+        err_s = error_s_reg.q;
+      y_controller.d = y_controller.END;
+       
+    }
+    
+    // counter counts upwards
+      if (counter.q == length){
+      counter.d = length;
+      } else{
+      counter.d = counter.q +1;
+      }
+
+    
+  }
+}
+
