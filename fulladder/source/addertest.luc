@@ -84,7 +84,7 @@ module addertest (
         y_controller.d = y_controller.ERROR;
       }      
       // if counter reaches end of list
-      if (counter.q == length){
+      if (counter.q == LENGTH){
         y_controller.d = y_controller.END;
       }        
       y_controller.ERROR:
