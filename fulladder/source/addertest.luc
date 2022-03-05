@@ -40,7 +40,7 @@ module addertest (
     const N_VALUES = {0,1,0,0,0,1};
     
     // length of values
-    const length = 3b110;
+    const LENGTH = 3b110;
     
 
  always {
@@ -103,8 +103,8 @@ module addertest (
     }
     
     // counter counts upwards
-      if (counter.q == length){
-      counter.d = length;
+      if (counter.q == LENGTH){
+      counter.d = LENGTH;
       } else{
       counter.d = counter.q +1;
       }
