@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="adder16" board="Alchitry Au" language="Lucid" version="3">
+  <files>
+    <src>seven_seg.luc</src>
+    <component>pipeline.luc</component>
+    <src>addertest.luc</src>
+    <src>sixteen_bit_full_adder.luc</src>
+    <component>counter.luc</component>
+    <src>multi_seven_seg.luc</src>
+    <component>reset_conditioner.luc</component>
+    <component>edge_detector.luc</component>
+    <component>decoder.luc</component>
+    <component>button_conditioner.luc</component>
+    <src top="true">au_top.luc</src>
+    <constraint lib="true">alchitry.acf</constraint>
+    <constraint lib="true">io.acf</constraint>
+    <constraint lib="true">au.xdc</constraint>
+  </files>
+</project>
