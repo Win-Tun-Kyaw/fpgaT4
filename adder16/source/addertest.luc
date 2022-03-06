@@ -31,6 +31,7 @@ module addertest (
         // in each state we do the calculation and then print the result to the segment display
         // when catching a error, i.e the err state, we go immediately to error state
         // in error state we can return to start state by pressing centre io button
+        // in error state, print the error state z v n s values that are wrong in the the middle led bank
         // pressing the left button jumps to end state so we can demonstrate how 
         fsm testCase(#INIT(START), .clk(clk), .rst(rst)) = {START,PPP,PPN,PNN,PPV,PNV,PP0,ERR,END,ERROR_STATE};
       }

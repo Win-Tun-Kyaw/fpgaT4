@@ -201,7 +201,7 @@ module addertest_4 (
         M_fa_x = 16'h5e94;
         M_fa_y = 16'h132f;
         M_fa_op = 6'h00;
-        M_checkoff_reg_d[0+0-:1] = 1'h1;
+        M_checkoff_reg_d[7+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h0);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h0);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h0);
@@ -219,7 +219,7 @@ module addertest_4 (
         M_fa_x = 16'h1a4d;
         M_fa_y = 16'h34ff;
         M_fa_op = 6'h01;
-        M_checkoff_reg_d[1+0-:1] = 1'h1;
+        M_checkoff_reg_d[6+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h0);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h0);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h1);
@@ -237,7 +237,7 @@ module addertest_4 (
         M_fa_x = 16'h2ff3;
         M_fa_y = 16'h9f22;
         M_fa_op = 6'h00;
-        M_checkoff_reg_d[2+0-:1] = 1'h1;
+        M_checkoff_reg_d[5+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h0);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h0);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h1);
@@ -255,7 +255,7 @@ module addertest_4 (
         M_fa_x = 16'h0001;
         M_fa_y = 16'h7fff;
         M_fa_op = 5'h00;
-        M_checkoff_reg_d[3+0-:1] = 1'h1;
+        M_checkoff_reg_d[4+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h0);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h1);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h1);
@@ -273,7 +273,7 @@ module addertest_4 (
         M_fa_x = 16'h8000;
         M_fa_y = 16'h0001;
         M_fa_op = 6'h01;
-        M_checkoff_reg_d[4+0-:1] = 1'h1;
+        M_checkoff_reg_d[3+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h0);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h1);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h0);
@@ -291,7 +291,7 @@ module addertest_4 (
         M_fa_x = 16'h0001;
         M_fa_y = 16'h0001;
         M_fa_op = 6'h01;
-        M_checkoff_reg_d[5+0-:1] = 1'h1;
+        M_checkoff_reg_d[2+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h1);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h0);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h0);
@@ -309,7 +309,7 @@ module addertest_4 (
         M_fa_x = 16'h0001;
         M_fa_y = 16'h0001;
         M_fa_op = 6'h00;
-        M_checkoff_reg_d[6+0-:1] = 1'h1;
+        M_checkoff_reg_d[1+0-:1] = 1'h1;
         M_flag_reg_d[3+0-:1] = (M_fa_z != 1'h1);
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h1);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h1);
@@ -348,18 +348,9 @@ module addertest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_checkoff_reg_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_checkoff_reg_q <= M_checkoff_reg_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_flag_reg_q <= 1'h0;
-    end else begin
-      M_flag_reg_q <= M_flag_reg_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   
@@ -375,9 +366,18 @@ module addertest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_checkoff_reg_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_checkoff_reg_q <= M_checkoff_reg_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_flag_reg_q <= 1'h0;
+    end else begin
+      M_flag_reg_q <= M_flag_reg_d;
     end
   end
   

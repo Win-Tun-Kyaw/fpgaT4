@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/vivado/adder16/adder16.runs/impl_1'
+HD_PWD='C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/vivado/adder16/adder16.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/vivado/adder16/adder16.runs/impl_1/au_top_0.tcl"
+  variable script "C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/vivado/adder16/adder16.runs/impl_1/au_top_0.tcl"
   variable category "vivado_impl"
 }
 
@@ -129,16 +129,16 @@ OPTRACE "create in-memory project" START { }
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/vivado/adder16/adder16.cache/wt} [current_project]
-  set_property parent.project_path {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/vivado/adder16/adder16.xpr} [current_project]
-  set_property ip_output_repo {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/vivado/adder16/adder16.cache/ip}} [current_project]
+  set_property webtalk.parent_dir {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/vivado/adder16/adder16.cache/wt} [current_project]
+  set_property parent.project_path {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/vivado/adder16/adder16.xpr} [current_project]
+  set_property ip_output_repo {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/vivado/adder16/adder16.cache/ip}} [current_project]
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/vivado/adder16/adder16.runs/synth_1/au_top_0.dcp}}
+  add_files -quiet {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/vivado/adder16/adder16.runs/synth_1/au_top_0.dcp}}
 OPTRACE "read constraints: implementation" START { }
-  read_xdc {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/constraint/alchitry.xdc}}
-  read_xdc {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/constraint/io.xdc}}
+  read_xdc {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/constraint/alchitry.xdc}}
+  read_xdc {{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/constraint/io.xdc}}
   read_xdc {{C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc}}
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }

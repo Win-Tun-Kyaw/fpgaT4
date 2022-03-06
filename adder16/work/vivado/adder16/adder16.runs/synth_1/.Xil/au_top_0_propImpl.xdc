@@ -1,5 +1,5 @@
-set_property SRC_FILE_INFO {cfile:{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/constraint/alchitry.xdc} rfile:../../../../../constraint/alchitry.xdc id:1} [current_design]
-set_property SRC_FILE_INFO {cfile:{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/adder16/work/constraint/io.xdc} rfile:../../../../../constraint/io.xdc id:2} [current_design]
+set_property SRC_FILE_INFO {cfile:{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/constraint/alchitry.xdc} rfile:../../../../../constraint/alchitry.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:{C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/adder16/work/constraint/io.xdc} rfile:../../../../../constraint/io.xdc id:2} [current_design]
 set_property src_info {type:XDC file:1 line:3 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN N14 [get_ports {clk}]
 set_property src_info {type:XDC file:1 line:5 export:INPUT save:INPUT read:READ} [current_design]
