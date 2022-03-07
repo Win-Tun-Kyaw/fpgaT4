@@ -9,12 +9,11 @@ module addertest_4 (
     input rst,
     input button,
     input endbutton,
-    output reg [15:0] out,
     output reg z,
     output reg v,
     output reg n,
     output reg [7:0] checkoff,
-    output reg [7:0] flag,
+    output reg [3:0] flag,
     output reg [15:0] s
   );
   
@@ -52,7 +51,7 @@ module addertest_4 (
     .out(M_end_detector_out)
   );
   reg [7:0] M_checkoff_reg_d, M_checkoff_reg_q = 1'h0;
-  reg [7:0] M_flag_reg_d, M_flag_reg_q = 1'h0;
+  reg [3:0] M_flag_reg_d, M_flag_reg_q = 1'h0;
   reg [15:0] M_s_reg_d, M_s_reg_q = 1'h0;
   localparam START_testCase = 4'd0;
   localparam PPP_testCase = 4'd1;
@@ -171,14 +170,12 @@ module addertest_4 (
     M_s_reg_d = M_s_reg_q;
     M_checkoff_reg_d = M_checkoff_reg_q;
     
-    out = 16'habcd;
     v = M_fa_v;
     n = M_fa_n;
     z = M_fa_z;
     checkoff = M_checkoff_reg_q;
     flag = M_flag_reg_q;
     s = M_s_reg_q;
-    out = 1'h0;
     M_fa_x = 1'h0;
     M_fa_y = 1'h0;
     M_fa_op = 1'h0;
@@ -187,11 +184,8 @@ module addertest_4 (
     
     case (M_testCase_q)
       START_testCase: begin
-        flag = 8'h00;
-        checkoff = 8'h00;
-        s = 16'h0000;
         M_flag_reg_d = 8'h00;
-        M_s_reg_d = 16'h0000;
+        M_s_reg_d = 16'hadde;
         M_checkoff_reg_d = 16'h0000;
         if (M_edge_detector_out == 1'h1) begin
           M_testCase_d = PPP_testCase;
@@ -314,7 +308,7 @@ module addertest_4 (
         M_flag_reg_d[2+0-:1] = (M_fa_v != 1'h1);
         M_flag_reg_d[1+0-:1] = (M_fa_n != 1'h1);
         M_flag_reg_d[0+0-:1] = (M_fa_s != 16'hffff);
-        M_s_reg_d = M_fa_s;
+        M_s_reg_d = 16'hdead;
         if (M_fa_s == 16'hffff & M_fa_z == 1'h1 & M_fa_n == 1'h1 & M_fa_v == 1'h1) begin
           if (M_edge_detector_out == 1'h1) begin
             M_testCase_d = END_testCase;
@@ -333,7 +327,7 @@ module addertest_4 (
         end
       end
       END_testCase: begin
-        M_flag_reg_d = 8'hff;
+        M_flag_reg_d = 8'h00;
         M_checkoff_reg_d = 8'hff;
         M_s_reg_d = 16'hc001;
         s = M_s_reg_q;
@@ -345,15 +339,6 @@ module addertest_4 (
       end
     endcase
   end
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_checkoff_reg_q <= 1'h0;
-    end else begin
-      M_checkoff_reg_q <= M_checkoff_reg_d;
-    end
-  end
-  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -378,6 +363,15 @@ module addertest_4 (
       M_s_reg_q <= 1'h0;
     end else begin
       M_s_reg_q <= M_s_reg_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_checkoff_reg_q <= 1'h0;
+    end else begin
+      M_checkoff_reg_q <= M_checkoff_reg_d;
     end
   end
   

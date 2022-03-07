@@ -52,7 +52,7 @@ module au_top_0 (
     .sel(M_seg_sel)
   );
   wire [16-1:0] M_shifterTest_out;
-  wire [13-1:0] M_shifterTest_checkoff;
+  wire [14-1:0] M_shifterTest_checkoff;
   wire [1-1:0] M_shifterTest_flag;
   wire [16-1:0] M_shifterTest_s;
   reg [1-1:0] M_shifterTest_button;
@@ -79,7 +79,7 @@ module au_top_0 (
     M_shifterTest_button = M_buttoncond_out[1+0-:1];
     M_shifterTest_endbutton = M_buttoncond_out[3+0-:1];
     io_led[0+0+7-:8] = M_shifterTest_checkoff[0+7-:8];
-    io_led[8+0+3-:4] = M_shifterTest_checkoff[8+4-:5];
+    io_led[8+0+6-:7] = M_shifterTest_checkoff[8+5-:6];
     io_led[8+7+0-:1] = M_shifterTest_flag;
     M_seg_values = {M_shifterTest_s[12+3-:4], M_shifterTest_s[8+3-:4], M_shifterTest_s[4+3-:4], M_shifterTest_s[0+3-:4]};
     io_seg = ~M_seg_seg;

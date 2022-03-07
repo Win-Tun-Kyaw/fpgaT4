@@ -60,7 +60,7 @@ module au_top (
     // to the right bank of leds 
     // io_led[0][7:0] = addertest.checkoff; // starting from the left it indicates which case number we are on.
     io_led[0][7:0] = shifterTest.checkoff[7:0];
-    io_led[1][3:0] = shifterTest.checkoff[12:8];
+    io_led[1][6:0] = shifterTest.checkoff[13:8];
     // when there is an error, we go to error 
     // we are showing which of the four outputs are incorrect
     // we connect the bank of led to flag output

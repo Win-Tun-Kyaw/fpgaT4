@@ -10,7 +10,7 @@ module shifterTest_4 (
     input button,
     input endbutton,
     output reg [15:0] out,
-    output reg [12:0] checkoff,
+    output reg [13:0] checkoff,
     output reg [0:0] flag,
     output reg [15:0] s
   );
@@ -42,7 +42,7 @@ module shifterTest_4 (
     .in(M_end_detector_in),
     .out(M_end_detector_out)
   );
-  reg [12:0] M_checkoff_reg_d, M_checkoff_reg_q = 1'h0;
+  reg [13:0] M_checkoff_reg_d, M_checkoff_reg_q = 1'h0;
   reg [0:0] M_flag_reg_d, M_flag_reg_q = 1'h0;
   reg [15:0] M_s_reg_d, M_s_reg_q = 1'h0;
   localparam START_testCase = 4'd0;
@@ -188,9 +188,9 @@ module shifterTest_4 (
       START_testCase: begin
         flag = 8'h00;
         checkoff = 8'h00;
-        s = 16'h0000;
+        s = 16'h51f7;
         M_flag_reg_d = 8'h00;
-        M_s_reg_d = 16'h0000;
+        M_s_reg_d = 16'h51f7;
         M_checkoff_reg_d = 16'h0000;
         if (M_edge_detector_out == 1'h1) begin
           M_testCase_d = LS1_testCase;
@@ -402,7 +402,7 @@ module shifterTest_4 (
       end
       END_testCase: begin
         M_flag_reg_d = 1'h1;
-        M_checkoff_reg_d = 13'h1fff;
+        M_checkoff_reg_d = 14'h3fff;
         M_s_reg_d = 16'hc001;
         s = M_s_reg_q;
         flag = M_flag_reg_q;
@@ -416,18 +416,18 @@ module shifterTest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_testCase_q <= 1'h0;
+      M_flag_reg_q <= 1'h0;
     end else begin
-      M_testCase_q <= M_testCase_d;
+      M_flag_reg_q <= M_flag_reg_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_testCase_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_testCase_q <= M_testCase_d;
     end
   end
   
@@ -443,9 +443,9 @@ module shifterTest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_flag_reg_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_flag_reg_q <= M_flag_reg_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   
