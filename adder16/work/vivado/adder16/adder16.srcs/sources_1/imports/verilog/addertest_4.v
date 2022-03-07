@@ -348,18 +348,18 @@ module addertest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_testCase_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_testCase_q <= M_testCase_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_testCase_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_testCase_q <= M_testCase_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   

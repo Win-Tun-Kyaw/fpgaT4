@@ -36,12 +36,13 @@ module addertest (
         fsm testCase(#INIT(START), .clk(clk), .rst(rst)) = {START,PPP,PPN,PNN,PPV,PNV,PP0,ERR,END,ERROR_STATE};
       }
     }
-    //P+P no flag
-    //P-P N flag
-    //P+N no flag
-    //P+P V flag
-    //P-P Z flag
-    //ERROR all s and flag values are wrong
+    //P+P no flag PPP
+    //P-P N flag PPN
+    //P+N no flag PNN
+    //P+P V flag PPV
+    //N-P V flag PNV
+    //P-P Z flag PP0
+    //ERROR all s and flag values are wrong ERR
     // from left to the right of second bank of ioled
     // z v n s
     // constants test conditions
