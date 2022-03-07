@@ -4,15 +4,12 @@ module shifterTest (
     input button,
     input endbutton,
     output out[16],
-    output z,
-    output v,
-    output n,
-    output checkoff[8], // is current correct????
-    output flag[8], // output the flags for this error
+    output checkoff[13], // is current correct????
+    output flag[1], // output the flags for this error
     output s[16] // output of sum value, 
    ) {
       // declare modules and constants 
-      sixteen_bit_full_adder fa;
+      shifter16 shift;
     .clk(clk) {
       edge_detector edge_detector(#RISE(1), #FALL(0));
       edge_detector end_detector(#RISE(1),#FALL(0));
@@ -20,11 +17,10 @@ module shifterTest (
         // register to show which test case we are on. 
         // lit nth bit starting from the left, means we are currently at nth case
         // output to the right bakn of leds
-        dff checkoff_reg[8](#INIT(0), .clk(clk), .rst(rst));
-        // error state left bit to right bit
-        // z v n s
+        dff checkoff_reg[13](#INIT(0), .clk(clk), .rst(rst));
+        // error state is s correct?
         // output to the middle bank of leds,
-        dff flag_reg[8](#INIT(0), .clk(clk), .rst(rst));
+        dff flag_reg[1](#INIT(0), .clk(clk), .rst(rst));
         // error s 
         dff s_reg[16](#INIT(0), .clk(clk), .rst(rst));
         // we move to the next state by pressing the centre io button
@@ -33,104 +29,116 @@ module shifterTest (
         // in error state we can return to start state by pressing centre io button
         // in error state, print the error state z v n s values that are wrong in the the middle led bank
         // pressing the left button jumps to end state so we can demonstrate how 
-        fsm testCase(#INIT(START), .clk(clk), .rst(rst)) = {START,PPP,PPN,PNN,PPV,PNV,PP0,ERR,END,ERROR_STATE};
+        fsm testCase(#INIT(START), .clk(clk), .rst(rst)) = {START,LS1,LS2,LS4,LS8,RS1,RS2,RS4,RS8,RSA1,RSA2,RSA4,RSA8,ERR00,END,ERROR_STATE};
       }
     }
-    //P+P no flag
-    //P-P N flag
-    //P+N no flag
-    //P+P V flag
-    //P-P Z flag
-    //ERROR all s and flag values are wrong
-    // from left to the right of second bank of ioled
-    // z v n s
+
     // constants test conditions
-    // PPP
-    const PPP_X = 16h5e94;
-    const PPP_ALUFN = b000000;  
-    const PPP_Y = 16h132f;
-    const PPP_S = 16h71c3;
-    const PPP_Z = 0;      
-    const PPP_V = 0;      
-    const PPP_N = 0;      
+    // LS1
+    const LS1_X = 16hf001;    
+    const LS1_ALUFN = b100000;
+    const LS1_Y = 16h0001;    
+    const LS1_S = 16he002;    
 
 
-    // PPN
-    const PPN_X = 16h1a4d;
-    const PPN_ALUFN = b000001;  
-    const PPN_Y = 16h34ff;
-    const PPN_S = 16he54e;
-    const PPN_Z = 0;      
-    const PPN_V = 0;      
-    const PPN_N = 1;      
+    // LS2
+    const LS2_X = 16hf001;    
+    const LS2_ALUFN = b100000;
+    const LS2_Y = 16h0002;    
+    const LS2_S = 16hc004;    
 
 
-    // PNN
-    const PNN_X = 16h2ff3;
-    const PNN_ALUFN = b000000;  
-    const PNN_Y = 16h9f22;
-    const PNN_S = 16hcf15;
-    const PNN_Z = 0;      
-    const PNN_V = 0;      
-    const PNN_N = 1;      
+    // LS4
+    const LS4_X = 16hf001;    
+    const LS4_ALUFN = b100000;
+    const LS4_Y = 16h0004;    
+    const LS4_S = 16h0010;    
 
 
-    // PPV
-    const PPV_X = 16h0001;
-    const PPV_ALUFN = b00000;  
-    const PPV_Y = 16h7FFF;
-    const PPV_S = 16h8000;
-    const PPV_Z = 0;      
-    const PPV_V = 1;      
-    const PPV_N = 1;      
-
-    // PNV
-    const PNV_X = 16h8000;
-    const PNV_ALUFN = b000001;
-    const PNV_Y = 16h0001;
-    const PNV_S = 16h7fff;
-    const PNV_Z = 0;
-    const PNV_V = 1;
-    const PNV_N = 0;
+    // LS8
+    const LS8_X = 16hf001;    
+    const LS8_ALUFN = b100000;
+    const LS8_Y = 16h0008;    
+    const LS8_S = 16h0100;    
 
 
-    // PP0
-    const PP0_X = 16h0001;
-    const PP0_ALUFN = b000001;
-    const PP0_Y = 16h0001;
-    const PP0_S = 16h0000;
-    const PP0_Z = 1;
-    const PP0_V = 0;
-    const PP0_N = 0;
+    // RS1
+    const RS1_X = 16hf001;    
+    const RS1_ALUFN = b100001;
+    const RS1_Y = 16h0001;    
+    const RS1_S = 16h7800;    
 
 
-    // ERR
-    const ERR_X = 16h0001;
-    const ERR_ALUFN = b000000;
-    const ERR_Y = 16h0001;
-    const ERR_S = 16hFFFF;
-    const ERR_Z = 1;
-    const ERR_V = 1;
-    const ERR_N = 1;
+    // RS2
+    const RS2_X = 16hf001;    
+    const RS2_ALUFN = b100001;
+    const RS2_Y = 16h0002;
+    const RS2_S = 16h3c00;
+
+
+    // RS4
+    const RS4_X = 16hf001;
+    const RS4_ALUFN = b100001;
+    const RS4_Y = 16h0004;
+    const RS4_S = 16h0f00;
+
+
+    // RS8
+    const RS8_X = 16hf001;
+    const RS8_ALUFN = b100001;
+    const RS8_Y = 16h0008;
+    const RS8_S = 16h00f0;
+
+
+    // RSA1
+    const RSA1_X = 16hf001;
+    const RSA1_ALUFN = b100011;
+    const RSA1_Y = 16h0001;
+    const RSA1_S = 16hf800;
+
+
+    // RSA2
+    const RSA2_X = 16hf001;
+    const RSA2_ALUFN = b100011;
+    const RSA2_Y = 16h0002;
+    const RSA2_S = 16hfc00;
+
+
+    // RSA4
+    const RSA4_X = 16hf001;
+    const RSA4_ALUFN = b100011;
+    const RSA4_Y = 16h0004;
+    const RSA4_S = 16hff00;
+
+
+    // RSA8
+    const RSA8_X = 16hf001;
+    const RSA8_ALUFN = b100011;
+    const RSA8_Y = 16h0008;
+    const RSA8_S = 16hfff0;
+
+
+    // ERR00
+    const ERR00_X = 16hf001;
+    const ERR00_ALUFN = b100000;
+    const ERR00_Y = 16h0008;
+    const ERR00_S = 16h0000;
+
    
     
 
  always {
     // q is out and d is input for dff 
     // default outputs
-    out = 16habcd;
-    v = fa.v;
-    n = fa.n;
-    z = fa.z;
     checkoff = checkoff_reg.q;
     flag = flag_reg.q;
     s = s_reg.q;
-    out = 0;
-
+    out = s_reg.q;
+    
     // default inputs
-    fa.x = 0;
-    fa.y = 0; 
-    fa.op = 0;
+    shift.x = 0;
+    shift.y = 0; 
+    shift.op = 0;
 
     edge_detector.in = button;
     end_detector.in = endbutton;
@@ -146,161 +154,260 @@ module shifterTest (
         s_reg.d = 16h0000;
         checkoff_reg.d = 16h0000;
         if (edge_detector.out == 1) {
-          testCase.d = testCase.PPP;
+          testCase.d = testCase.LS1;
         }
-        // PPP
-        testCase.PPP:
-        fa.x = PPP_X;
-        fa.y = PPP_Y;
-        fa.op = PPP_ALUFN;
-        //turn on io_led to indicate which case we are on
-        checkoff_reg.d[7] = 1;
+        // LS1
+        testCase.LS1:
+        shift.x = LS1_X;
+        shift.y = LS1_Y;
+        shift.op = LS1_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[0] = 1;
         //wait for the timer
         // check values
-        flag_reg.d[3] = (fa.z != PPP_Z);
-        flag_reg.d[2] = (fa.v != PPP_V);
-        flag_reg.d[1] = (fa.n != PPP_N);
-        flag_reg.d[0] = (fa.s != PPP_S);
-        s_reg.d = fa.s;
-        if (fa.s == PPP_S & fa.z == PPP_Z & fa.n == PPP_N & fa.v == PPP_V){
+        flag_reg.d[0] = (shift.s != LS1_S);
+        s_reg.d = shift.s;
+        if (shift.s == LS1_S){
             if (edge_detector.out == 1) {
-                testCase.d = testCase.PPN;
+                testCase.d = testCase.LS2;
             }
             } else {
                 testCase.d = testCase.ERROR_STATE;
         }
 
 
-        // PPN
-        testCase.PPN:
-        fa.x = PPN_X;
-        fa.y = PPN_Y;
-        fa.op = PPN_ALUFN;
-        //turn on io_led to indicate which case we are on
-        checkoff_reg.d[6] = 1;
-        //wait for the timer
-        // check values
-        flag_reg.d[3] = (fa.z != PPN_Z);
-        flag_reg.d[2] = (fa.v != PPN_V);
-        flag_reg.d[1] = (fa.n != PPN_N);
-        flag_reg.d[0] = (fa.s != PPN_S);
-        s_reg.d = fa.s;
-        if (fa.s == PPN_S & fa.z == PPN_Z & fa.n == PPN_N & fa.v == PPN_V){
-            if (edge_detector.out == 1) {
-                testCase.d = testCase.PNN;
-            }
-            } else {
-                testCase.d = testCase.ERROR_STATE;
-        }
-
-
-        // PNN
-        testCase.PNN:
-        fa.x = PNN_X;
-        fa.y = PNN_Y;
-        fa.op = PNN_ALUFN;
-        //turn on io_led to indicate which case we are on
-        checkoff_reg.d[5] = 1;
-        //wait for the timer
-        // check values
-        flag_reg.d[3] = (fa.z != PNN_Z);
-        flag_reg.d[2] = (fa.v != PNN_V);
-        flag_reg.d[1] = (fa.n != PNN_N);
-        flag_reg.d[0] = (fa.s != PNN_S);
-        s_reg.d = fa.s;
-        if (fa.s == PNN_S & fa.z == PNN_Z & fa.n == PNN_N & fa.v == PNN_V){
-            if (edge_detector.out == 1) {
-                testCase.d = testCase.PPV;
-            }
-            } else {
-                testCase.d = testCase.ERROR_STATE;
-        }
-
-
-        // PPV
-        testCase.PPV:
-        fa.x = PPV_X;
-        fa.y = PPV_Y;
-        fa.op = PPV_ALUFN;
-        //turn on io_led to indicate which case we are on
-        checkoff_reg.d[4] = 1;
-        //wait for the timer
-        // check values
-        flag_reg.d[3] = (fa.z != PPV_Z);
-        flag_reg.d[2] = (fa.v != PPV_V);
-        flag_reg.d[1] = (fa.n != PPV_N);
-        flag_reg.d[0] = (fa.s != PPV_S);
-        s_reg.d = fa.s;
-        if (fa.s == PPV_S & fa.z == PPV_Z & fa.n == PPV_N & fa.v == PPV_V){
-            if (edge_detector.out == 1) {
-                testCase.d = testCase.PNV;
-            }
-            } else {
-                testCase.d = testCase.ERROR_STATE;
-        }
-
-
-        // PNV
-        testCase.PNV:
-        fa.x = PNV_X;
-        fa.y = PNV_Y;
-        fa.op = PNV_ALUFN;
-        //turn on io_led to indicate which case we are on
-        checkoff_reg.d[3] = 1;
-        //wait for the timer
-        // check values
-        flag_reg.d[3] = (fa.z != PNV_Z);
-        flag_reg.d[2] = (fa.v != PNV_V);
-        flag_reg.d[1] = (fa.n != PNV_N);
-        flag_reg.d[0] = (fa.s != PNV_S);
-        s_reg.d = fa.s;
-        if (fa.s == PNV_S & fa.z == PNV_Z & fa.n == PNV_N & fa.v == PNV_V){
-            if (edge_detector.out == 1) {
-                testCase.d = testCase.PP0;
-            }
-            } else {
-                testCase.d = testCase.ERROR_STATE;
-        }
-
-
-        // PP0
-        testCase.PP0:
-        fa.x = PP0_X;
-        fa.y = PP0_Y;
-        fa.op = PP0_ALUFN;
-        //turn on io_led to indicate which case we are on
-        checkoff_reg.d[2] = 1;
-        //wait for the timer
-        // check values
-        flag_reg.d[3] = (fa.z != PP0_Z);
-        flag_reg.d[2] = (fa.v != PP0_V);
-        flag_reg.d[1] = (fa.n != PP0_N);
-        flag_reg.d[0] = (fa.s != PP0_S);
-        s_reg.d = fa.s;
-        if (fa.s == PP0_S & fa.z == PP0_Z & fa.n == PP0_N & fa.v == PP0_V){
-            if (edge_detector.out == 1) {
-                testCase.d = testCase.ERR;
-            }
-            } else {
-                testCase.d = testCase.ERROR_STATE;
-        }
-
-
-        // ERR
-        testCase.ERR:
-        fa.x = ERR_X;
-        fa.y = ERR_Y;
-        fa.op = ERR_ALUFN;
-        //turn on io_led to indicate which case we are on
+        // LS2
+        testCase.LS2:
+        shift.x = LS2_X;
+        shift.y = LS2_Y;
+        shift.op = LS2_ALUFN;
+        //turn on io_led to indicate which case we are on        
         checkoff_reg.d[1] = 1;
         //wait for the timer
         // check values
-        flag_reg.d[3] = (fa.z != ERR_Z);
-        flag_reg.d[2] = (fa.v != ERR_V);
-        flag_reg.d[1] = (fa.n != ERR_N);
-        flag_reg.d[0] = (fa.s != ERR_S);
-        s_reg.d = fa.s;
-        if (fa.s == ERR_S & fa.z == ERR_Z & fa.n == ERR_N & fa.v == ERR_V){
+        flag_reg.d[0] = (shift.s != LS2_S);
+        s_reg.d = shift.s;
+        if (shift.s == LS2_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.LS4;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // LS4
+        testCase.LS4:
+        shift.x = LS4_X;
+        shift.y = LS4_Y;
+        shift.op = LS4_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[2] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != LS4_S);
+        s_reg.d = shift.s;
+        if (shift.s == LS4_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.LS8;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // LS8
+        testCase.LS8:
+        shift.x = LS8_X;
+        shift.y = LS8_Y;
+        shift.op = LS8_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[3] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != LS8_S);
+        s_reg.d = shift.s;
+        if (shift.s == LS8_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RS1;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RS1
+        testCase.RS1:
+        shift.x = RS1_X;
+        shift.y = RS1_Y;
+        shift.op = RS1_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[4] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RS1_S);
+        s_reg.d = shift.s;
+        if (shift.s == RS1_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RS2;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RS2
+        testCase.RS2:
+        shift.x = RS2_X;
+        shift.y = RS2_Y;
+        shift.op = RS2_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[5] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RS2_S);
+        s_reg.d = shift.s;
+        if (shift.s == RS2_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RS4;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RS4
+        testCase.RS4:
+        shift.x = RS4_X;
+        shift.y = RS4_Y;
+        shift.op = RS4_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[6] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RS4_S);
+        s_reg.d = shift.s;
+        if (shift.s == RS4_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RS8;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RS8
+        testCase.RS8:
+        shift.x = RS8_X;
+        shift.y = RS8_Y;
+        shift.op = RS8_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[7] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RS8_S);
+        s_reg.d = shift.s;
+        if (shift.s == RS8_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RSA1;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RSA1
+        testCase.RSA1:
+        shift.x = RSA1_X;
+        shift.y = RSA1_Y;
+        shift.op = RSA1_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[8] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RSA1_S);
+        s_reg.d = shift.s;
+        if (shift.s == RSA1_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RSA2;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RSA2
+        testCase.RSA2:
+        shift.x = RSA2_X;
+        shift.y = RSA2_Y;
+        shift.op = RSA2_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[9] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RSA2_S);
+        s_reg.d = shift.s;
+        if (shift.s == RSA2_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RSA4;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RSA4
+        testCase.RSA4:
+        shift.x = RSA4_X;
+        shift.y = RSA4_Y;
+        shift.op = RSA4_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[10] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RSA4_S);
+        s_reg.d = shift.s;
+        if (shift.s == RSA4_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.RSA8;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // RSA8
+        testCase.RSA8:
+        shift.x = RSA8_X;
+        shift.y = RSA8_Y;
+        shift.op = RSA8_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[11] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != RSA8_S);
+        s_reg.d = shift.s;
+        if (shift.s == RSA8_S){
+            if (edge_detector.out == 1) {
+                testCase.d = testCase.ERR00;
+            }
+            } else {
+                testCase.d = testCase.ERROR_STATE;
+        }
+
+
+        // ERR00
+        testCase.ERR00:
+        shift.x = ERR00_X;
+        shift.y = ERR00_Y;
+        shift.op = ERR00_ALUFN;
+        //turn on io_led to indicate which case we are on        
+        checkoff_reg.d[12] = 1;
+        //wait for the timer
+        // check values
+        flag_reg.d[0] = (shift.s != ERR00_S);
+        s_reg.d = 16hdead;
+        if (shift.s == ERR00_S){
             if (edge_detector.out == 1) {
                 testCase.d = testCase.END;
             }
@@ -318,8 +425,8 @@ module shifterTest (
       testCase.END:
       // turn on all the lights used 
       // turn the registers we use to all equal 1s bitwise
-      flag_reg.d = 8hff;
-      checkoff_reg.d = 8hff;
+      flag_reg.d = 1;
+      checkoff_reg.d = 13b1111111111111;
       // write cool on segment leds
       s_reg.d =16hc001;
       // output them registers

@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Mon Mar  7 12:27:32 2022
+| Date         : Mon Mar  7 14:40:10 2022
 | Host         : DESKTOP-1I22819 running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -file au_top_0_timing_summary_routed.rpt -pb au_top_0_timing_summary_routed.pb -rpx au_top_0_timing_summary_routed.rpx -warn_on_violation
 | Design       : au_top_0
@@ -237,7 +237,7 @@ Slack (MET) :             1.760ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -309,7 +309,7 @@ Slack (MET) :             1.766ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -381,7 +381,7 @@ Slack (MET) :             1.766ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -453,7 +453,7 @@ Slack (MET) :             1.766ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -525,7 +525,7 @@ Slack (MET) :             1.766ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -597,7 +597,7 @@ Slack (MET) :             1.786ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -669,7 +669,7 @@ Slack (MET) :             1.802ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -741,7 +741,7 @@ Slack (MET) :             1.897ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -813,7 +813,7 @@ Slack (MET) :             1.897ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
@@ -885,7 +885,7 @@ Slack (MET) :             1.910ns  (required time - arrival time)
     SLICE_X52Y65         LUT5 (Prop_lut5_I1_O)        0.332     9.789 r  addertest/FSM_onehot_M_testCase_q[3]_i_2/O
                          net (fo=6, routed)           0.727    10.516    addertest/FSM_onehot_M_testCase_q[3]_i_2_n_0
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.328    10.844 r  addertest/FSM_onehot_M_testCase_q[7]_i_2/O
-                         net (fo=12, routed)          0.685    11.529    addertest/in15[0]
+                         net (fo=12, routed)          0.685    11.529    addertest/in24[0]
     SLICE_X53Y66         LUT5 (Prop_lut5_I3_O)        0.124    11.653 r  addertest/FSM_onehot_M_testCase_q[9]_i_3/O
                          net (fo=2, routed)           0.809    12.462    addertest/edge_detector/FSM_onehot_M_testCase_q_reg[0]
     SLICE_X53Y64         LUT5 (Prop_lut5_I0_O)        0.124    12.586 r  addertest/edge_detector/FSM_onehot_M_testCase_q[9]_i_1/O
