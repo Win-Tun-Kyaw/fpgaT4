@@ -348,9 +348,9 @@ module addertest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_checkoff_reg_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_checkoff_reg_q <= M_checkoff_reg_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   
@@ -375,9 +375,9 @@ module addertest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_checkoff_reg_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_checkoff_reg_q <= M_checkoff_reg_d;
     end
   end
   

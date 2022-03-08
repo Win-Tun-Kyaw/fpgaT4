@@ -2,7 +2,6 @@ module shifterTest (
     input clk,  // clock
     input rst,  // reset
     input button,
-    input endbutton,
     output out[16],
     output checkoff[13], // is current correct????
     output flag[1], // output the flags for this error
@@ -12,7 +11,6 @@ module shifterTest (
       shifter16 shift;
     .clk(clk) {
       edge_detector edge_detector(#RISE(1), #FALL(0));
-      edge_detector end_detector(#RISE(1),#FALL(0));
       .rst(rst) {
         // register to show which test case we are on. 
         // lit nth bit starting from the left, means we are currently at nth case
@@ -141,7 +139,6 @@ module shifterTest (
     shift.op = 0;
 
     edge_detector.in = button;
-    end_detector.in = endbutton;
 
 
     //declare fsm
@@ -417,8 +414,6 @@ module shifterTest (
       testCase.ERROR_STATE:
       // we remain in error state until we press button
       if (edge_detector.out ==1){
-        testCase.d = testCase.START;
-      } else if (end_detector.out ==1){
         // if we press the end button we go to the end state 
         testCase.d = testCase.END;
         }
@@ -426,7 +421,7 @@ module shifterTest (
       // turn on all the lights used 
       // turn the registers we use to all equal 1s bitwise
       flag_reg.d = 1;
-      checkoff_reg.d = 13b1111111111111;
+      checkoff_reg.d = 14b11111111111111;
       // write cool on segment leds
       s_reg.d =16hc001;
       // output them registers

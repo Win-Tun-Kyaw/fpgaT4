@@ -1,0 +1,152 @@
+module masterTest (
+    input clk,  // clock
+    input rst,  // reset
+    input button[2],
+    input alufn[6], // these are the six left most switch on the left bank
+    output checkoff[14],
+    output s[16],
+    output flag[4]
+  ) {
+    // declare modules
+   .clk(clk) {
+      // declare the edge_detectors for buttons
+      edge_detector nextMod(#RISE(1), #FALL(0));
+      edge_detector moduleButton(#RISE(1), #FALL(0));    
+      // step counter
+    .rst(rst){
+      // declare our registers for flags and source and counter
+      // output to the right banks of leds
+      dff checkoff_reg[14](#INIT(0), .clk(clk), .rst(rst));
+      // error state is s correct?
+      // output to the middle bank of leds,
+      dff flag_reg[4](#INIT(0), .clk(clk), .rst(rst));
+      // error s 
+      dff s_reg[16](#INIT(0), .clk(clk), .rst(rst));
+      // start button is pressed
+    
+      subberTest subberTest;
+      adderTest addertest;      
+      shlTest shlTest; 
+      shrTest shrTest;
+      sraTest sraTest;
+      test_mult test_mult;
+      // declare our fsm
+      fsm selectModCase(#INIT(START),.clk(clk),.rst(rst)) = {START,ADD,SUB,SHL,SHR,SRA,MUL,ERROR};
+    }
+  }
+ 
+  always {
+    // declare and connect the buttons to inputs.
+    nextMod.in = button[0];   
+    moduleButton.in = button[1];
+    addertest.button = 0;
+    subberTest.button = 0;
+    shlTest.button = 0;
+    shrTest.button = 0;
+    sraTest.button = 0;
+    test_mult.button = 0;
+    // depending on our dip selections
+    // connect our main button to the button
+    if (alufn == b000000){
+      addertest.button = moduleButton.out;
+    }
+    else if (alufn == b000001){
+      subberTest.button = moduleButton.out;
+    }  
+    else if (alufn == b100000){
+      shlTest.button = moduleButton.out;
+    }
+    else if (alufn == b100001){
+      shrTest.button = moduleButton.out;
+    }    
+    else if (alufn == b100011){
+      sraTest.button = moduleButton.out;
+    }   
+    else if (alufn == b000010){
+      test_mult.button = moduleButton.out;
+    } 
+      
+    // connect outputs to the registers 
+    s = s_reg.q;
+    flag = flag_reg.q;
+    checkoff = checkoff_reg.q;
+    
+    case (selectModCase.q)
+    {
+        selectModCase.START:
+        flag_reg.d = 8h00;
+        s_reg.d = 16h57a7;
+        checkoff_reg.d = 16h0000;
+        
+        if (nextMod.out == 1 & alufn == b000000) {
+          selectModCase.d = selectModCase.ADD;
+        }
+        else if (nextMod.out == 1 & alufn == b000001) {
+          selectModCase.d = selectModCase.SUB;
+        }          
+        else if (nextMod.out == 1 & alufn == b100000) {
+          selectModCase.d = selectModCase.SHL;
+        }
+        else if (nextMod.out == 1 & alufn == b100001) {
+          selectModCase.d = selectModCase.SHR;
+        }        
+        else if (nextMod.out == 1 & alufn == b100011) {
+          selectModCase.d = selectModCase.SRA;
+        } 
+        else if (nextMod.out == 1 & alufn == b000010) {
+          selectModCase.d = selectModCase.MUL;
+        }             
+
+          
+        selectModCase.ADD:
+        // connect outputs
+        s_reg.d = addertest.s;
+        // s flag
+        flag_reg.d[3] = addertest.flag[0];
+        // z v n flags
+        flag_reg.d[2:0] = addertest.flag[3:1];
+        // checkoff
+        checkoff_reg.d = addertest.checkoff;
+        
+        selectModCase.SUB:
+        // connect outputs
+        s_reg.d = subberTest.s;
+        // s flag
+        flag_reg.d[3] = subberTest.flag[0];
+        // z v n flags
+        flag_reg.d[2:0] = subberTest.flag[3:1];
+        // checkoff
+        checkoff_reg.d = subberTest.checkoff;
+        
+        selectModCase.SHL:
+        // connect outputs
+        s_reg.d = shlTest.s;
+        // s flag
+        flag_reg.d[3] = shlTest.flag[0];        
+        // checkoff
+        checkoff_reg.d = shlTest.checkoff;
+
+        selectModCase.SHR:
+        // connect outputs
+        s_reg.d = shrTest.s;
+        // s flag
+        flag_reg.d[3] = shrTest.flag[0];        
+        // checkoff
+        checkoff_reg.d = shrTest.checkoff;
+
+        selectModCase.SRA:
+        // connect outputs
+        s_reg.d = sraTest.s;
+        // s flag
+        flag_reg.d[3] = sraTest.flag[0];        
+        // checkoff
+        checkoff_reg.d = sraTest.checkoff;                
+        
+        selectModCase.MUL:
+        s_reg.d = test_mult.out;
+        flag_reg.d[3] = test_mult.error;
+        checkoff_reg.d = test_mult.checkoff;
+                        
+    }
+  }
+}

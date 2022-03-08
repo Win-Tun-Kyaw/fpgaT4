@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="test" board="Alchitry Au" language="Lucid" version="3">
   <files>
-    <src top="true">au_top.luc</src>
-    <src>decimal_counter.luc</src>
-    <src>multi_dec_ctr.luc</src>
-    <component>counter.luc</component>
     <src>multi_seven_seg.luc</src>
+    <component>pipeline.luc</component>
+    <src>multi_dec_ctr.luc</src>
     <src>seven_seg.luc</src>
-    <component>reset_conditioner.luc</component>
+    <component>counter.luc</component>
+    <src>decimal_counter.luc</src>
     <component>decoder.luc</component>
+    <src>sixteen_bit_multiplier.luc</src>
+    <src>sixteen_bit_full_adder.luc</src>
+    <src>subberTest.luc</src>
+    <src>masterTest.luc</src>
+    <src>adderTest.luc</src>
+    <src top="true">au_top.luc</src>
+    <src>sraTest.luc</src>
+    <src>shifter16.luc</src>
+    <component>reset_conditioner.luc</component>
+    <src>test_mult.luc</src>
     <component>edge_detector.luc</component>
+    <src>shrTest.luc</src>
+    <component>button_conditioner.luc</component>
+    <src>shlTest.luc</src>
     <constraint lib="true">alchitry.acf</constraint>
     <constraint lib="true">io.acf</constraint>
     <constraint lib="true">au.xdc</constraint>

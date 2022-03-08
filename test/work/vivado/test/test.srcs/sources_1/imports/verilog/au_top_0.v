@@ -28,13 +28,19 @@ module au_top_0 (
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
-  wire [1-1:0] M_edge_detector_out;
-  reg [1-1:0] M_edge_detector_in;
-  edge_detector_2 edge_detector (
-    .clk(clk),
-    .in(M_edge_detector_in),
-    .out(M_edge_detector_out)
-  );
+  wire [(3'h5+0)-1:0] M_buttoncond_out;
+  reg [(3'h5+0)-1:0] M_buttoncond_in;
+  
+  genvar GEN_buttoncond0;
+  generate
+  for (GEN_buttoncond0=0;GEN_buttoncond0<3'h5;GEN_buttoncond0=GEN_buttoncond0+1) begin: buttoncond_gen_0
+    button_conditioner_2 buttoncond (
+      .clk(clk),
+      .in(M_buttoncond_in[GEN_buttoncond0*(1)+(1)-1-:(1)]),
+      .out(M_buttoncond_out[GEN_buttoncond0*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
   wire [7-1:0] M_seg_seg;
   wire [4-1:0] M_seg_sel;
   reg [16-1:0] M_seg_values;
@@ -45,31 +51,41 @@ module au_top_0 (
     .seg(M_seg_seg),
     .sel(M_seg_sel)
   );
-  wire [16-1:0] M_dec_ctr_digits;
-  reg [1-1:0] M_dec_ctr_inc;
-  multi_dec_ctr_4 dec_ctr (
+  wire [14-1:0] M_masterTest_checkoff;
+  wire [16-1:0] M_masterTest_s;
+  wire [4-1:0] M_masterTest_flag;
+  reg [2-1:0] M_masterTest_button;
+  reg [6-1:0] M_masterTest_alufn;
+  masterTest_4 masterTest (
     .clk(clk),
     .rst(rst),
-    .inc(M_dec_ctr_inc),
-    .digits(M_dec_ctr_digits)
-  );
-  wire [1-1:0] M_ctr_value;
-  counter_5 ctr (
-    .clk(clk),
-    .rst(rst),
-    .value(M_ctr_value)
+    .button(M_masterTest_button),
+    .alufn(M_masterTest_alufn),
+    .checkoff(M_masterTest_checkoff),
+    .s(M_masterTest_s),
+    .flag(M_masterTest_flag)
   );
   
   always @* begin
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
-    led = 64'hffffffffffffffff;
     usb_tx = usb_rx;
-    M_edge_detector_in = M_ctr_value;
-    M_dec_ctr_inc = M_edge_detector_out;
-    M_seg_values = M_dec_ctr_digits;
+    led = 8'h00;
+    io_led = 24'h000000;
+    io_led[16+0+0-:1] = io_button[4+0-:1];
+    io_led[16+0+0-:1] = io_button[3+0-:1];
+    io_led[16+0+0-:1] = io_button[2+0-:1];
+    io_led[16+0+0-:1] = io_button[1+0-:1];
+    io_led[16+0+0-:1] = io_button[0+0-:1];
+    M_buttoncond_in = io_button;
+    M_masterTest_button = M_buttoncond_out[0+1-:2];
+    M_masterTest_alufn = io_dip[16+2+5-:6];
+    io_led[0+0+7-:8] = M_masterTest_checkoff[0+7-:8];
+    io_led[8+0+5-:6] = M_masterTest_checkoff[8+5-:6];
+    io_led[8+4+3-:4] = M_masterTest_flag;
+    io_led[16+2+5-:6] = io_dip[16+2+5-:6];
+    M_seg_values = {M_masterTest_s[12+3-:4], M_masterTest_s[8+3-:4], M_masterTest_s[4+3-:4], M_masterTest_s[0+3-:4]};
     io_seg = ~M_seg_seg;
     io_sel = ~M_seg_sel;
-    io_led = io_dip;
   end
 endmodule

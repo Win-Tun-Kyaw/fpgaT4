@@ -1,13 +1,12 @@
 #-----------------------------------------------------------
-# Vivado v2021.2 (64-bit)
-# SW Build 3367213 on Tue Oct 19 02:48:09 MDT 2021
-# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
-# Start of session at: Sat Mar  5 00:05:28 2022
-# Process ID: 9264
-# Current directory: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/test/work/vivado/test/test.runs/synth_1
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Mar  8 19:31:49 2022
+# Process ID: 16404
+# Current directory: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.runs/synth_1
 # Command line: vivado.exe -log au_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
-# Log file: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/test/work/vivado/test/test.runs/synth_1/au_top_0.vds
-# Journal file: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpga/test/work/vivado/test/test.runs/synth_1\vivado.jou
-# Running On: DESKTOP-1I22819, OS: Windows, CPU Frequency: 1190 MHz, CPU Physical cores: 4, Host memory: 16940 MB
+# Log file: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.runs/synth_1/au_top_0.vds
+# Journal file: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source au_top_0.tcl -notrace

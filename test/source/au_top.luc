@@ -8,40 +8,73 @@ module au_top (
     output io_seg [8],      // 7-segment LEDs on IO Shield
     output io_sel [4],      // Digit select on IO Shield
     input io_button [5],    // 5 buttons on IO Shield
+    //   0
+    // 3 1 4
+    //   2
     input io_dip [3][8]     // DIP switches on IO Shield
+    
   ) {
   
-  sig rst;                  // reset signal
-  
-  .clk(clk) {
+    sig rst;                  // reset signal
+    // declare modules
+   .clk(clk) {
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
-    
-    edge_detector edge_detector (#RISE(1), #FALL(0));
-    
-    .rst(rst) {
+    // this module checks if we are pressing any of the 5 io buttons
+    button_conditioner buttoncond[5];
+
+    .rst(rst){
+      // declare our module to address the segment         
       multi_seven_seg seg;
-      multi_dec_ctr dec_ctr;
-      counter ctr (#SIZE(1), #DIV(24));
+      // declare our test module
+      masterTest masterTest;
     }
   }
+
   
+
+    
+
   always {
-    reset_cond.in = ~rst_n;   // input raw inverted reset signal
-    rst = reset_cond.out;     // conditioned reset
     
-    led = 8x{8hff};  // connect buttons to LEDs
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    usb_tx = usb_rx;        // loop serial port
     
-    usb_tx = usb_rx;          // loop serial port
+    led = 8h00;             // turn LEDs off
+    io_led = 3x{{8h00}};    // turn io LEDs off  
     
-    edge_detector.in = ctr.value;
-    dec_ctr.inc = edge_detector.out;
-    seg.values = dec_ctr.digits;
+    // connect stuff to our test module
+    // connect buttons
+    io_led[2][0] = io_button[4];
+    io_led[2][0] = io_button[3];
+    io_led[2][0] = io_button[2];
+    io_led[2][0] = io_button[1];
+    io_led[2][0] = io_button[0];
     
-    io_seg = ~seg.seg; // connect segments to the driver
-    io_sel = ~seg.sel; // connect digit select to the driver
     
-    io_led = io_dip;   // connect the DIP switches to the LEDs
-  }
+    buttoncond.in = io_button[4:0];
+    // connect test module buttons
+    masterTest.button = buttoncond.out[1:0];
+    masterTest.alufn = io_dip[2][7:2];
+    // connect output checkoff counter to
+    // to the right bank of leds 
+    // io_led[0][7:0] = addertest.checkoff; // starting from the left it indicates which case number we are on.
+    io_led[0][7:0] = masterTest.checkoff[7:0];
+    io_led[1][5:0] = masterTest.checkoff[13:8];
+    // when there is an error, we go to error 
+    // we are showing which of the four outputs are incorrect
+    // we connect the bank of led to flag output
+    io_led[1][7:4] = masterTest.flag; // look to the leftmost led on the middle bank
+    
+    // connect the left bank leds to the dip switches
+    io_led[2][7:2] = io_dip[2][7:2];
+     // connect s output to segment's values
+     //seg.values = {4he,4hf,4hc,4hd};
+     seg.values = {masterTest.s[15:12],masterTest.s[11:8],masterTest.s[7:4],masterTest.s[3:0]};
+     io_seg = ~seg.seg;          //  select needed segments, we do bitwise inversion as 0 indicates selected segment
+     io_sel = ~seg.sel;           // select all needed digits
+
+
 }
