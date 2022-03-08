@@ -1,0 +1,24 @@
+module comp (
+    input clk,  // clock
+    input rst,  // reset
+    
+    input op[6],  // ALUFN
+    input a[16],  // 1st number
+    input b[16],  // 2nd Number
+    output out[16]
+  ) {
+
+  sig result[16];
+  
+  always {
+  
+    result = 0;
+    
+    case (op[2:1]) {
+      1: result = c{15b0, (a==b)};
+      2: result = c{15b0, (a<b)};
+      3: result = c{15b0, (a<=b)};
+    }
+    out = result;
+  }
+}

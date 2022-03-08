@@ -55,14 +55,10 @@ module au_top_0 (
   wire [16-1:0] M_masterTest_s;
   wire [4-1:0] M_masterTest_flag;
   reg [1-1:0] M_masterTest_button;
-  reg [1-1:0] M_masterTest_endbutton;
-  reg [6-1:0] M_masterTest_io_dip;
   masterTest_4 masterTest (
     .clk(clk),
     .rst(rst),
     .button(M_masterTest_button),
-    .endbutton(M_masterTest_endbutton),
-    .io_dip(M_masterTest_io_dip),
     .checkoff(M_masterTest_checkoff),
     .s(M_masterTest_s),
     .flag(M_masterTest_flag)
@@ -74,11 +70,9 @@ module au_top_0 (
     usb_tx = usb_rx;
     led = 8'h00;
     io_led = 24'h000000;
-    M_masterTest_io_dip = io_dip[16+2+5-:6];
     io_led[16+0+4-:5] = io_button;
     M_buttoncond_in = io_button;
     M_masterTest_button = M_buttoncond_out[1+0-:1];
-    M_masterTest_endbutton = M_buttoncond_out[3+0-:1];
     io_led[0+0+7-:8] = M_masterTest_checkoff[0+7-:8];
     io_led[8+0+4-:5] = M_masterTest_checkoff[8+4-:5];
     io_led[8+4+3-:4] = M_masterTest_flag;

@@ -8,48 +8,29 @@ module masterTest_4 (
     input clk,
     input rst,
     input button,
-    input endbutton,
     output reg [13:0] checkoff,
     output reg [15:0] s,
-    output reg [3:0] flag,
-    input [5:0] io_dip
+    output reg [3:0] flag
   );
   
   
   
-  wire [1-1:0] M_edge_detector_out;
-  reg [1-1:0] M_edge_detector_in;
-  edge_detector_9 edge_detector (
+  wire [1-1:0] M_nextMod_out;
+  reg [1-1:0] M_nextMod_in;
+  edge_detector_9 nextMod (
     .clk(clk),
-    .in(M_edge_detector_in),
-    .out(M_edge_detector_out)
-  );
-  wire [1-1:0] M_end_detector_out;
-  reg [1-1:0] M_end_detector_in;
-  edge_detector_9 end_detector (
-    .clk(clk),
-    .in(M_end_detector_in),
-    .out(M_end_detector_out)
+    .in(M_nextMod_in),
+    .out(M_nextMod_out)
   );
   reg [13:0] M_checkoff_reg_d, M_checkoff_reg_q = 1'h0;
   reg [3:0] M_flag_reg_d, M_flag_reg_q = 1'h0;
   reg [15:0] M_s_reg_d, M_s_reg_q = 1'h0;
-  wire [1-1:0] M_addertest_z;
-  wire [1-1:0] M_addertest_v;
-  wire [1-1:0] M_addertest_n;
   wire [8-1:0] M_addertest_checkoff;
   wire [4-1:0] M_addertest_flag;
   wire [16-1:0] M_addertest_s;
-  reg [1-1:0] M_addertest_button;
-  reg [1-1:0] M_addertest_endbutton;
   addertest_10 addertest (
     .clk(clk),
     .rst(rst),
-    .button(M_addertest_button),
-    .endbutton(M_addertest_endbutton),
-    .z(M_addertest_z),
-    .v(M_addertest_v),
-    .n(M_addertest_n),
     .checkoff(M_addertest_checkoff),
     .flag(M_addertest_flag),
     .s(M_addertest_s)
@@ -58,79 +39,71 @@ module masterTest_4 (
   wire [14-1:0] M_shifterTest_checkoff;
   wire [1-1:0] M_shifterTest_flag;
   wire [16-1:0] M_shifterTest_s;
-  reg [1-1:0] M_shifterTest_button;
-  reg [1-1:0] M_shifterTest_endbutton;
   shifterTest_11 shifterTest (
     .clk(clk),
     .rst(rst),
-    .button(M_shifterTest_button),
-    .endbutton(M_shifterTest_endbutton),
     .out(M_shifterTest_out),
     .checkoff(M_shifterTest_checkoff),
     .flag(M_shifterTest_flag),
     .s(M_shifterTest_s)
   );
-  localparam START_testCase = 2'd0;
-  localparam ADD_testCase = 2'd1;
-  localparam SHIFT_testCase = 2'd2;
-  localparam END_testCase = 2'd3;
+  localparam START_selectModCase = 2'd0;
+  localparam ADD_selectModCase = 2'd1;
+  localparam SHIFT_selectModCase = 2'd2;
+  localparam END_selectModCase = 2'd3;
   
-  reg [1:0] M_testCase_d, M_testCase_q = START_testCase;
+  reg [1:0] M_selectModCase_d, M_selectModCase_q = START_selectModCase;
   
   always @* begin
-    M_testCase_d = M_testCase_q;
+    M_selectModCase_d = M_selectModCase_q;
     M_flag_reg_d = M_flag_reg_q;
     M_s_reg_d = M_s_reg_q;
     M_checkoff_reg_d = M_checkoff_reg_q;
     
-    M_edge_detector_in = button;
-    M_end_detector_in = endbutton;
-    M_addertest_button = M_edge_detector_out;
-    M_addertest_endbutton = M_end_detector_out;
-    M_shifterTest_button = M_edge_detector_out;
-    M_shifterTest_endbutton = M_end_detector_out;
+    M_nextMod_in = button;
     s = M_s_reg_q;
     flag = M_flag_reg_q;
     checkoff = M_checkoff_reg_q;
     
-    case (M_testCase_q)
-      START_testCase: begin
+    case (M_selectModCase_q)
+      START_selectModCase: begin
         flag = 8'h00;
         checkoff = 8'h00;
-        s = 16'h0000;
+        s = 16'h57a7;
         M_flag_reg_d = 8'h00;
-        M_s_reg_d = 16'h0000;
+        M_s_reg_d = 16'h57a7;
         M_checkoff_reg_d = 16'h0000;
-        if (io_dip == 6'h01) begin
-          if (M_edge_detector_out == 1'h1) begin
-            M_testCase_d = ADD_testCase;
-          end
-        end
-        if (io_dip == 6'h20) begin
-          if (M_edge_detector_out == 1'h1) begin
-            M_testCase_d = SHIFT_testCase;
-          end
+        if (M_nextMod_out == 1'h1) begin
+          M_selectModCase_d = ADD_selectModCase;
         end
       end
-      ADD_testCase: begin
+      ADD_selectModCase: begin
         M_s_reg_d = M_addertest_s;
         M_flag_reg_d[3+0-:1] = M_addertest_flag[0+0-:1];
         M_flag_reg_d[0+2-:3] = M_addertest_flag[1+2-:3];
         M_checkoff_reg_d = M_addertest_checkoff;
         if (M_addertest_checkoff == 7'h7f) begin
-          if (M_edge_detector_out == 1'h1) begin
-            M_testCase_d = START_testCase;
+          if (M_nextMod_out == 1'h1) begin
+            M_selectModCase_d = SHIFT_selectModCase;
           end
         end
       end
-      SHIFT_testCase: begin
+      SHIFT_selectModCase: begin
         M_s_reg_d = M_shifterTest_s;
         M_flag_reg_d[3+0-:1] = M_shifterTest_flag;
         M_checkoff_reg_d = M_shifterTest_checkoff;
         if (M_addertest_checkoff == 14'h3fff) begin
-          if (M_edge_detector_out == 1'h1) begin
-            M_testCase_d = START_testCase;
+          if (M_nextMod_out == 1'h1) begin
+            M_selectModCase_d = END_selectModCase;
           end
+        end
+      end
+      END_selectModCase: begin
+        M_s_reg_d = 16'hc001;
+        M_flag_reg_d[3+0-:1] = 3'h7;
+        M_checkoff_reg_d = 16'hffff;
+        if (M_nextMod_out == 1'h1) begin
+          M_selectModCase_d = START_selectModCase;
         end
       end
     endcase
@@ -138,9 +111,9 @@ module masterTest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_testCase_q <= 1'h0;
+      M_checkoff_reg_q <= 1'h0;
     end else begin
-      M_testCase_q <= M_testCase_d;
+      M_checkoff_reg_q <= M_checkoff_reg_d;
     end
   end
   
@@ -156,18 +129,18 @@ module masterTest_4 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_selectModCase_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_selectModCase_q <= M_selectModCase_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_checkoff_reg_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_checkoff_reg_q <= M_checkoff_reg_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   

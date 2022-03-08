@@ -1,11 +1,6 @@
 module addertest (
     input clk,  // clock
     input rst,  // reset
-    input button,
-    input endbutton,
-    output z,
-    output v,
-    output n,
     output checkoff[8], // is current correct????
     output flag[4], // output the flags for this error
     output s[16] // output of sum value, 
@@ -13,8 +8,8 @@ module addertest (
       // declare modules and constants 
       sixteen_bit_full_adder fa;
     .clk(clk) {
-      edge_detector edge_detector(#RISE(1), #FALL(0));
-      edge_detector end_detector(#RISE(1),#FALL(0));
+      // edge_detector
+      edge_detector edge_detector(#RISE(1), #FALL(0)); 
       .rst(rst) {
         // register to show which test case we are on. 
         // lit nth bit starting from the left, means we are currently at nth case
@@ -26,6 +21,9 @@ module addertest (
         dff flag_reg[4](#INIT(0), .clk(clk), .rst(rst));
         // error s 
         dff s_reg[16](#INIT(0), .clk(clk), .rst(rst));
+        // counter to progress through the test cases 
+        counter step_counter(#SIZE(1),#DIV(26));
+      
         // end reg for indicating if we are at end state
         // we move to the next state by pressing the centre io button
         // in each state we do the calculation and then print the result to the segment display
@@ -119,9 +117,6 @@ module addertest (
  always {
     // q is out and d is input for dff 
     // default outputs
-    v = fa.v;
-    n = fa.n;
-    z = fa.z;
     checkoff = checkoff_reg.q;
     flag = flag_reg.q;
     s = s_reg.q;
@@ -130,10 +125,11 @@ module addertest (
     fa.x = 0;
     fa.y = 0; 
     fa.op = 0;
-
-    edge_detector.in = button;
-    end_detector.in = endbutton;
-
+    // using our special slower clock, detect rising edge
+    
+    edge_detector.in = step_counter.value;
+    
+    
 
     //declare fsm
     case (testCase.q) {
@@ -311,13 +307,10 @@ module addertest (
                 testCase.d = testCase.ERROR_STATE;
         }
       testCase.ERROR_STATE:
-      // we remain in error state until we press button
+      // we error state then go to end state
       if (edge_detector.out ==1){
-        testCase.d = testCase.START;
-      } else if (end_detector.out ==1){
-        // if we press the end button we go to the end state 
         testCase.d = testCase.END;
-        }
+       }
       testCase.END:
       // turn on all the lights used 
       // turn the registers we use to all equal 1s bitwise
@@ -329,8 +322,8 @@ module addertest (
       s = s_reg.q;
       flag = flag_reg.q;
       checkoff = checkoff_reg.q;
-      //remain in this state until we press the button
-      if (edge_detector.out ==1){
+      // loop back to the start
+      if (edge_detector.out == 1){
         testCase.d = testCase.START;
       }    
     }

@@ -46,14 +46,11 @@ module au_top (
     io_led = 3x{{8h00}};    // turn io LEDs off  
     
     // connect stuff to our test module
-    // connect io_dip
-    masterTest.io_dip = io_dip[2][7:2];
     // connect buttons
     io_led[2][4:0] = io_button[4:0];
     buttoncond.in = io_button[4:0];
     // connect test module buttons
     masterTest.button = buttoncond.out[1];
-    masterTest.endbutton = buttoncond.out[3];
     // connect output checkoff counter to
     // to the right bank of leds 
     // io_led[0][7:0] = addertest.checkoff; // starting from the left it indicates which case number we are on.
@@ -69,14 +66,5 @@ module au_top (
      io_seg = ~seg.seg;          //  select needed segments, we do bitwise inversion as 0 indicates selected segment
      io_sel = ~seg.sel;           // select all needed digits
 
-    
-    //io_led[2] = addertest.counter.q;
-    //io_led[1] = addertest.out[7:0];
-    //io_led[2] = addertest.out[15:8];
-    
-
-//    io_led[2][7] = addertest.z;
-//    io_led[2][6] = addertest.v;
-//    io_led[2][5] = addertest.n;
 
 }

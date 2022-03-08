@@ -86,6 +86,7 @@ OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/addertest_10.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/button_conditioner_2.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/counter_13.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/counter_6.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/decoder_8.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/edge_detector_9.v}
@@ -94,7 +95,7 @@ read_verilog -library xil_defaultlib {
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/pipeline_5.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/reset_conditioner_1.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/seven_seg_7.v}
-  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/shifter16_13.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/shifter16_14.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/shifterTest_11.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_12.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/bigTestEr/work/vivado/bigTestEr/bigTestEr.srcs/sources_1/imports/verilog/au_top_0.v}
