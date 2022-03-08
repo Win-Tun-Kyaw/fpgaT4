@@ -33,10 +33,10 @@ for i in range(len(titles)-1):
     string += "checkoff_reg.d[{0}] = 1;\n".format(i)
     string += "//wait for the timer\n"
     string += "// check values\n"
-    string += "flag_reg.d[2] = (fa.z != {0}_Z);\n".format(titles[i])
-    string += "flag_reg.d[1] = (fa.v != {0}_V);\n".format(titles[i])
-    string += "flag_reg.d[0] = (fa.n != {0}_N);\n".format(titles[i])
-    string += "flag_reg.d[3] = (fa.s != {0}_S);\n".format(titles[i])      
+    string += "flag_reg.d[3] = (fa.z != {0}_Z);\n".format(titles[i])
+    string += "flag_reg.d[2] = (fa.v != {0}_V);\n".format(titles[i])
+    string += "flag_reg.d[1] = (fa.n != {0}_N);\n".format(titles[i])
+    string += "flag_reg.d[0] = (fa.s != {0}_S);\n".format(titles[i])      
     string += "s_reg.d = fa.s;\n" 
     string += "if (fa.s == {0}_S & fa.z == {0}_Z & fa.n == {0}_N & fa.v == {0}_V)".format(titles[i])
     string += "{\n"

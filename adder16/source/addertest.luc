@@ -3,11 +3,12 @@ module addertest (
     input rst,  // reset
     input button,
     input endbutton,
+    output out[16],
     output z,
     output v,
     output n,
     output checkoff[8], // is current correct????
-    output flag[4], // output the flags for this error
+    output flag[8], // output the flags for this error
     output s[16] // output of sum value, 
    ) {
       // declare modules and constants 
@@ -23,10 +24,9 @@ module addertest (
         // error state left bit to right bit
         // z v n s
         // output to the middle bank of leds,
-        dff flag_reg[4](#INIT(0), .clk(clk), .rst(rst));
+        dff flag_reg[8](#INIT(0), .clk(clk), .rst(rst));
         // error s 
         dff s_reg[16](#INIT(0), .clk(clk), .rst(rst));
-        // end reg for indicating if we are at end state
         // we move to the next state by pressing the centre io button
         // in each state we do the calculation and then print the result to the segment display
         // when catching a error, i.e the err state, we go immediately to error state
@@ -119,12 +119,14 @@ module addertest (
  always {
     // q is out and d is input for dff 
     // default outputs
+    out = 16habcd;
     v = fa.v;
     n = fa.n;
     z = fa.z;
     checkoff = checkoff_reg.q;
     flag = flag_reg.q;
     s = s_reg.q;
+    out = 0;
 
     // default inputs
     fa.x = 0;
@@ -138,14 +140,11 @@ module addertest (
     //declare fsm
     case (testCase.q) {
         testCase.START:
-        // we reset all the values to zero, in case we come to start state 
-        // from a previous state with flag, checkoff and s values
- //       flag = 8h00;
-//        checkoff = 8h00;
-//        s = 16hADDE;
-        //
+        flag = 8h00;
+        checkoff = 8h00;
+        s = 16h00;
         flag_reg.d = 8h00;
-        s_reg.d = 16hADDE;
+        s_reg.d = 16h0000;
         checkoff_reg.d = 16h0000;
         if (edge_detector.out == 1) {
           testCase.d = testCase.PPP;
@@ -301,8 +300,7 @@ module addertest (
         flag_reg.d[2] = (fa.v != ERR_V);
         flag_reg.d[1] = (fa.n != ERR_N);
         flag_reg.d[0] = (fa.s != ERR_S);
-        // show that we are at the value of err testcase 
-        s_reg.d = 16hdead;
+        s_reg.d = fa.s;
         if (fa.s == ERR_S & fa.z == ERR_Z & fa.n == ERR_N & fa.v == ERR_V){
             if (edge_detector.out == 1) {
                 testCase.d = testCase.END;
@@ -321,7 +319,7 @@ module addertest (
       testCase.END:
       // turn on all the lights used 
       // turn the registers we use to all equal 1s bitwise
-      flag_reg.d = 8h00;
+      flag_reg.d = 8hff;
       checkoff_reg.d = 8hff;
       // write cool on segment leds
       s_reg.d =16hc001;

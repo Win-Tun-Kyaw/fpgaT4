@@ -51,11 +51,12 @@ module au_top_0 (
     .seg(M_seg_seg),
     .sel(M_seg_sel)
   );
+  wire [16-1:0] M_addertest_out;
   wire [1-1:0] M_addertest_z;
   wire [1-1:0] M_addertest_v;
   wire [1-1:0] M_addertest_n;
   wire [8-1:0] M_addertest_checkoff;
-  wire [4-1:0] M_addertest_flag;
+  wire [8-1:0] M_addertest_flag;
   wire [16-1:0] M_addertest_s;
   reg [1-1:0] M_addertest_button;
   reg [1-1:0] M_addertest_endbutton;
@@ -64,6 +65,7 @@ module au_top_0 (
     .rst(rst),
     .button(M_addertest_button),
     .endbutton(M_addertest_endbutton),
+    .out(M_addertest_out),
     .z(M_addertest_z),
     .v(M_addertest_v),
     .n(M_addertest_n),
@@ -83,7 +85,7 @@ module au_top_0 (
     M_addertest_button = M_buttoncond_out[1+0-:1];
     M_addertest_endbutton = M_buttoncond_out[3+0-:1];
     io_led[0+0+7-:8] = M_addertest_checkoff;
-    io_led[8+0+3-:4] = M_addertest_flag;
+    io_led[8+0+7-:8] = M_addertest_flag;
     M_seg_values = {M_addertest_s[12+3-:4], M_addertest_s[8+3-:4], M_addertest_s[4+3-:4], M_addertest_s[0+3-:4]};
     io_seg = ~M_seg_seg;
     io_sel = ~M_seg_sel;

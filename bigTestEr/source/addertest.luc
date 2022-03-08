@@ -1,6 +1,7 @@
 module addertest (
     input clk,  // clock
     input rst,  // reset
+    input button,
     output checkoff[8], // is current correct????
     output flag[4], // output the flags for this error
     output s[16] // output of sum value, 
@@ -10,6 +11,8 @@ module addertest (
     .clk(clk) {
       // edge_detector
       edge_detector edge_detector(#RISE(1), #FALL(0)); 
+      edge_detector button_detecter(#RISE(1), #FALL(0)); 
+
       .rst(rst) {
         // register to show which test case we are on. 
         // lit nth bit starting from the left, means we are currently at nth case
@@ -128,7 +131,7 @@ module addertest (
     // using our special slower clock, detect rising edge
     
     edge_detector.in = step_counter.value;
-    
+    button_detecter.in = button;
     
 
     //declare fsm
@@ -143,7 +146,7 @@ module addertest (
         flag_reg.d = 8h00;
         s_reg.d = 16hADDE;
         checkoff_reg.d = 16h0000;
-        if (edge_detector.out == 1) {
+        if (edge_detector.out == 1 ) {
           testCase.d = testCase.PPP;
         }
         // PPP

@@ -4,7 +4,7 @@ module shifterTest (
     input button,
     input endbutton,
     output out[16],
-    output checkoff[14], // is current correct????
+    output checkoff[13], // is current correct????
     output flag[1], // output the flags for this error
     output s[16] // output of sum value, 
    ) {
@@ -16,8 +16,8 @@ module shifterTest (
       .rst(rst) {
         // register to show which test case we are on. 
         // lit nth bit starting from the left, means we are currently at nth case
-        // when we reach the end state, we have light 1 more bit than the number of test cases
-        dff checkoff_reg[14](#INIT(0), .clk(clk), .rst(rst));
+        // output to the right bakn of leds
+        dff checkoff_reg[13](#INIT(0), .clk(clk), .rst(rst));
         // error state is s correct?
         // output to the middle bank of leds,
         dff flag_reg[1](#INIT(0), .clk(clk), .rst(rst));
@@ -149,9 +149,9 @@ module shifterTest (
         testCase.START:
         flag = 8h00;
         checkoff = 8h00;
-        s = 16h51f7;
+        s = 16h00;
         flag_reg.d = 8h00;
-        s_reg.d = 16h51f7;
+        s_reg.d = 16h0000;
         checkoff_reg.d = 16h0000;
         if (edge_detector.out == 1) {
           testCase.d = testCase.LS1;
@@ -426,7 +426,7 @@ module shifterTest (
       // turn on all the lights used 
       // turn the registers we use to all equal 1s bitwise
       flag_reg.d = 1;
-      checkoff_reg.d = 14b11111111111111;
+      checkoff_reg.d = 13b1111111111111;
       // write cool on segment leds
       s_reg.d =16hc001;
       // output them registers

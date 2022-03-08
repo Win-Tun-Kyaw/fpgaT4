@@ -2,6 +2,7 @@ module masterTest (
     input clk,  // clock
     input rst,  // reset
     input button,
+    input alufn[6], // these are the six left most switch on the left bank
     output checkoff[14],
     output s[16],
     output flag[4]
@@ -20,8 +21,8 @@ module masterTest (
       dff flag_reg[4](#INIT(0), .clk(clk), .rst(rst));
       // error s 
       dff s_reg[16](#INIT(0), .clk(clk), .rst(rst));
-
-
+      // start button is pressed
+    
 
       addertest addertest;      
       shifterTest shifterTest; 
@@ -51,8 +52,11 @@ module masterTest (
         flag_reg.d = 8h00;
         s_reg.d = 16h57a7;
         checkoff_reg.d = 16h0000;
-        if (nextMod.out == 1) {
+        if (nextMod.out == 1 & alufn == b000001) {
           selectModCase.d = selectModCase.ADD;
+        }
+        else if (nextMod.out == 1 & alufn == b100000) {
+          selectModCase.d = selectModCase.SHIFT;
         }
         selectModCase.ADD:
         // connect outputs
