@@ -9,6 +9,8 @@ module adderTest (
       // declare modules and constants 
       sixteen_bit_full_adder fa;
     .clk(clk) {
+      // this is sync our button presses with the clk signal.
+      // without it we have metastability issues
       edge_detector edge_detector(#RISE(1), #FALL(0));
       .rst(rst) {
         // register to show which test case we are on. 
@@ -95,7 +97,8 @@ module adderTest (
     fa.x = 0;
     fa.y = 0; 
     fa.op = 0;
-
+    
+    // edge_detector is checking if we pressed button
     edge_detector.in = button;
 
 
@@ -106,6 +109,7 @@ module adderTest (
         // we want to print something to show that we are in the correct component
         s_reg.d = 16hadd0;
         checkoff_reg.d = 16h0000;
+        // edge_detector sees we have pressed the button
         if (edge_detector.out == 1) {
           testCase.d = testCase.PPP;
         }
