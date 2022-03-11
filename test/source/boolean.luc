@@ -1,0 +1,22 @@
+module boolean (
+
+    
+    // inputs
+    input a[16],
+    input b[16],
+    input op[6],
+    //outputs
+    output s[16]
+  ) {
+
+  always {
+    s = 0;
+    
+    case(op[3:0]) {
+    8: s = a&b; // and
+    14:s = a|b; // or
+    6: s = a^b; //xor
+    10:s = a;   // "A"
+    }
+  }
+}

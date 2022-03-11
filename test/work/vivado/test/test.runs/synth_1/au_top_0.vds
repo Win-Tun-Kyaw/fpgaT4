@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Tue Mar  8 19:31:49 2022
-# Process ID: 16404
+# Start of session at: Fri Mar 11 11:39:40 2022
+# Process ID: 7368
 # Current directory: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.runs/synth_1
 # Command line: vivado.exe -log au_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
 # Log file: C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.runs/synth_1/au_top_0.vds
@@ -17,9 +17,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 19248
+INFO: [Synth 8-7075] Helper process launched with PID 20532
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'au_top_0' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/au_top_0.v:7]
 INFO: [Synth 8-6157] synthesizing module 'button_conditioner_2' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/button_conditioner_2.v:13]
@@ -52,14 +52,15 @@ INFO: [Synth 8-6157] synthesizing module 'decoder_8' [C:/Users/cajhm/OneDrive - 
 INFO: [Synth 8-6155] done synthesizing module 'decoder_8' (6#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/decoder_8.v:11]
 INFO: [Synth 8-6155] done synthesizing module 'multi_seven_seg_3' (7#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/multi_seven_seg_3.v:12]
 INFO: [Synth 8-6157] synthesizing module 'masterTest_4' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/masterTest_4.v:7]
-	Parameter START_selectModCase bound to: 3'b000 
-	Parameter ADD_selectModCase bound to: 3'b001 
-	Parameter SUB_selectModCase bound to: 3'b010 
-	Parameter SHL_selectModCase bound to: 3'b011 
-	Parameter SHR_selectModCase bound to: 3'b100 
-	Parameter SRA_selectModCase bound to: 3'b101 
-	Parameter MUL_selectModCase bound to: 3'b110 
-	Parameter ERROR_selectModCase bound to: 3'b111 
+	Parameter START_selectModCase bound to: 4'b0000 
+	Parameter ADD_selectModCase bound to: 4'b0001 
+	Parameter SUB_selectModCase bound to: 4'b0010 
+	Parameter BOOL_selectModCase bound to: 4'b0011 
+	Parameter SHL_selectModCase bound to: 4'b0100 
+	Parameter SHR_selectModCase bound to: 4'b0101 
+	Parameter SRA_selectModCase bound to: 4'b0110 
+	Parameter MUL_selectModCase bound to: 4'b0111 
+	Parameter ERROR_selectModCase bound to: 4'b1000 
 INFO: [Synth 8-6157] synthesizing module 'edge_detector_9' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/edge_detector_9.v:12]
 	Parameter RISE bound to: 1'b1 
 	Parameter FALL bound to: 1'b0 
@@ -108,8 +109,8 @@ INFO: [Synth 8-6157] synthesizing module 'subberTest_10' [C:/Users/cajhm/OneDriv
 	Parameter ERR_Z bound to: 1'b0 
 	Parameter ERR_V bound to: 1'b1 
 	Parameter ERR_N bound to: 1'b1 
-INFO: [Synth 8-6157] synthesizing module 'sixteen_bit_full_adder_16' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_16.v:7]
-INFO: [Synth 8-6155] done synthesizing module 'sixteen_bit_full_adder_16' (9#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_16.v:7]
+INFO: [Synth 8-6157] synthesizing module 'sixteen_bit_full_adder_17' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_17.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'sixteen_bit_full_adder_17' (9#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_17.v:7]
 INFO: [Synth 8-6155] done synthesizing module 'subberTest_10' (10#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/subberTest_10.v:7]
 INFO: [Synth 8-6157] synthesizing module 'adderTest_11' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/adderTest_11.v:7]
 	Parameter START_testCase bound to: 3'b000 
@@ -185,9 +186,9 @@ INFO: [Synth 8-6157] synthesizing module 'shlTest_12' [C:/Users/cajhm/OneDrive -
 	Parameter ERR00_ALUFN bound to: 6'b100000 
 	Parameter ERR00_Y bound to: 16'b0000000000001000 
 	Parameter ERR00_S bound to: 16'b0000000000000000 
-INFO: [Synth 8-6157] synthesizing module 'shifter16_17' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_17.v:7]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_17.v:19]
-INFO: [Synth 8-6155] done synthesizing module 'shifter16_17' (12#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_17.v:7]
+INFO: [Synth 8-6157] synthesizing module 'shifter16_18' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_18.v:7]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_18.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'shifter16_18' (12#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_18.v:7]
 INFO: [Synth 8-6155] done synthesizing module 'shlTest_12' (13#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shlTest_12.v:7]
 INFO: [Synth 8-6157] synthesizing module 'shrTest_13' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shrTest_13.v:7]
 	Parameter START_testCase bound to: 3'b000 
@@ -269,25 +270,40 @@ INFO: [Synth 8-6157] synthesizing module 'test_mult_15' [C:/Users/cajhm/OneDrive
 	Parameter ERR1 bound to: 16'b0000000000000110 
 	Parameter ERR2 bound to: 16'b0000000000000100 
 	Parameter ERR12 bound to: 16'b0000000000011000 
-INFO: [Synth 8-6157] synthesizing module 'sixteen_bit_multiplier_18' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_multiplier_18.v:7]
-INFO: [Synth 8-6155] done synthesizing module 'sixteen_bit_multiplier_18' (16#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_multiplier_18.v:7]
+INFO: [Synth 8-6157] synthesizing module 'sixteen_bit_multiplier_19' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_multiplier_19.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'sixteen_bit_multiplier_19' (16#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_multiplier_19.v:7]
 INFO: [Synth 8-6155] done synthesizing module 'test_mult_15' (17#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/test_mult_15.v:7]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/masterTest_4.v:170]
-INFO: [Synth 8-6155] done synthesizing module 'masterTest_4' (18#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/masterTest_4.v:7]
-INFO: [Synth 8-6155] done synthesizing module 'au_top_0' (19#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/au_top_0.v:7]
+INFO: [Synth 8-6157] synthesizing module 'booleantest_16' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/booleantest_16.v:7]
+	Parameter START_state bound to: 3'b000 
+	Parameter AND_state bound to: 3'b001 
+	Parameter OR_state bound to: 3'b010 
+	Parameter XOR_state bound to: 3'b011 
+	Parameter A_state bound to: 3'b100 
+	Parameter PASS_state bound to: 3'b101 
+	Parameter ERRCASE_state bound to: 3'b110 
+	Parameter ERR_state bound to: 3'b111 
+	Parameter A1 bound to: 16'b0110100001010111 
+	Parameter B1 bound to: 16'b1010110000001000 
+INFO: [Synth 8-6157] synthesizing module 'boolean_20' [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/boolean_20.v:7]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/boolean_20.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'boolean_20' (18#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/boolean_20.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'booleantest_16' (19#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/booleantest_16.v:7]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/masterTest_4.v:188]
+INFO: [Synth 8-6155] done synthesizing module 'masterTest_4' (20#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/masterTest_4.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'au_top_0' (21#1) [C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/au_top_0.v:7]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 1017.664 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -304,26 +320,26 @@ Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.
 Finished Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1017.664 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'M_testCase_q_reg' in module 'subberTest_10'
 INFO: [Synth 8-802] inferred FSM for state register 'M_testCase_q_reg' in module 'adderTest_11'
@@ -331,6 +347,7 @@ INFO: [Synth 8-802] inferred FSM for state register 'M_testCase_q_reg' in module
 INFO: [Synth 8-802] inferred FSM for state register 'M_testCase_q_reg' in module 'shrTest_13'
 INFO: [Synth 8-802] inferred FSM for state register 'M_testCase_q_reg' in module 'sraTest_14'
 INFO: [Synth 8-802] inferred FSM for state register 'M_testMult_q_reg' in module 'test_mult_15'
+INFO: [Synth 8-802] inferred FSM for state register 'M_state_q_reg' in module 'booleantest_16'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -409,8 +426,21 @@ INFO: [Synth 8-3354] encoded FSM with state register 'M_testCase_q_reg' using en
            DONE_testMult |                         10000000 |                              011
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'M_testMult_q_reg' using encoding 'one-hot' in module 'test_mult_15'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+             START_state |                         00000001 |                              000
+               AND_state |                         00000010 |                              001
+                OR_state |                         00000100 |                              010
+               XOR_state |                         00001000 |                              011
+                 A_state |                         00010000 |                              100
+           ERRCASE_state |                         00100000 |                              110
+               ERR_state |                         01000000 |                              111
+              PASS_state |                         10000000 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'M_state_q_reg' using encoding 'one-hot' in module 'booleantest_16'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -421,36 +451,39 @@ Detailed RTL Component Info :
 	   3 Input   16 Bit       Adders := 2     
 	   2 Input    1 Bit       Adders := 2     
 +---XORs : 
+	   2 Input     16 Bit         XORs := 1     
 	   2 Input      1 Bit         XORs := 4     
 +---Registers : 
 	               18 Bit    Registers := 1     
-	               16 Bit    Registers := 7     
+	               16 Bit    Registers := 8     
 	               14 Bit    Registers := 1     
 	                8 Bit    Registers := 6     
+	                6 Bit    Registers := 1     
 	                4 Bit    Registers := 4     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 5     
-	                1 Bit    Registers := 14    
+	                1 Bit    Registers := 16    
 +---Muxes : 
 	   2 Input   18 Bit        Muxes := 1     
 	   2 Input   16 Bit        Muxes := 2     
-	   8 Input   16 Bit        Muxes := 14    
+	   8 Input   16 Bit        Muxes := 16    
 	   4 Input   16 Bit        Muxes := 3     
-	   8 Input   15 Bit        Muxes := 1     
-	   8 Input    8 Bit        Muxes := 8     
-	   2 Input    8 Bit        Muxes := 6     
-	   8 Input    6 Bit        Muxes := 3     
+	   8 Input   15 Bit        Muxes := 2     
+	   8 Input    8 Bit        Muxes := 9     
+	   2 Input    8 Bit        Muxes := 11    
+	   8 Input    6 Bit        Muxes := 5     
 	   4 Input    4 Bit        Muxes := 1     
-	   8 Input    4 Bit        Muxes := 7     
+	   8 Input    4 Bit        Muxes := 8     
+	   2 Input    4 Bit        Muxes := 1     
 	   8 Input    3 Bit        Muxes := 5     
-	   2 Input    3 Bit        Muxes := 26    
-	   6 Input    3 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 17    
-	   8 Input    1 Bit        Muxes := 17    
-	   6 Input    1 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 27    
+	   5 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 23    
+	   8 Input    1 Bit        Muxes := 19    
 	   4 Input    1 Bit        Muxes := 1     
 	   5 Input    1 Bit        Muxes := 1     
-	   7 Input    1 Bit        Muxes := 1     
+	   6 Input    1 Bit        Muxes := 1     
+	   7 Input    1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -469,7 +502,7 @@ Start Cross Boundary and Area Optimization
 DSP Report: Generating DSP mult/p0, operation Mode is: A*B.
 DSP Report: operator mult/p0 is absorbed into DSP mult/p0.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -479,7 +512,7 @@ DSP: Preliminary Mapping	Report (see note below)
 +--------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
 |Module Name               | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
 +--------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-|sixteen_bit_multiplier_18 | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|sixteen_bit_multiplier_19 | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
 +--------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
 
 Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
@@ -490,19 +523,19 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:51 ; elapsed = 00:00:52 . Memory (MB): peak = 1017.281 ; gain = 0.000
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:41 . Memory (MB): peak = 1017.664 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:00:55 . Memory (MB): peak = 1037.043 ; gain = 19.762
+Finished Timing Optimization : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 1037.859 ; gain = 20.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:54 ; elapsed = 00:00:56 . Memory (MB): peak = 1045.055 ; gain = 27.773
+Finished Technology Mapping : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 1042.598 ; gain = 24.934
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -520,37 +553,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished IO Insertion : Time (s): cpu = 00:00:46 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:46 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:46 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -570,36 +603,37 @@ Report Cell Usage:
 |2     |CARRY4  |    23|
 |3     |DSP48E1 |     1|
 |4     |LUT1    |     7|
-|5     |LUT2    |    46|
-|6     |LUT3    |   107|
-|7     |LUT4    |   120|
-|8     |LUT5    |    58|
-|9     |LUT6    |   106|
-|10    |FDRE    |   254|
-|11    |FDSE    |     5|
-|12    |IBUF    |    11|
-|13    |OBUF    |    45|
+|5     |LUT2    |    54|
+|6     |LUT3    |   116|
+|7     |LUT4    |   134|
+|8     |LUT5    |    51|
+|9     |LUT6    |   115|
+|10    |MUXF7   |    20|
+|11    |FDRE    |   280|
+|12    |FDSE    |     6|
+|13    |IBUF    |    11|
+|14    |OBUF    |    45|
 +------+--------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:46 ; elapsed = 00:00:59 . Memory (MB): peak = 1048.809 ; gain = 31.527
-Synthesis Optimization Complete : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1048.809 ; gain = 31.527
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:36 ; elapsed = 00:00:45 . Memory (MB): peak = 1048.395 ; gain = 30.730
+Synthesis Optimization Complete : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 1048.395 ; gain = 30.730
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1060.934 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 24 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1060.418 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 44 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1061.887 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1060.418 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-69 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+76 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:08 ; elapsed = 00:01:11 . Memory (MB): peak = 1061.887 ; gain = 62.039
+synth_design: Time (s): cpu = 00:00:53 ; elapsed = 00:00:56 . Memory (MB): peak = 1060.418 ; gain = 59.824
 INFO: [Common 17-1381] The checkpoint 'C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.runs/synth_1/au_top_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file au_top_0_utilization_synth.rpt -pb au_top_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Mar  8 19:33:03 2022...
+INFO: [Common 17-206] Exiting Vivado at Fri Mar 11 11:40:39 2022...

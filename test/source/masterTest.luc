@@ -30,8 +30,9 @@ module masterTest (
       shrTest shrTest;
       sraTest sraTest;
       test_mult test_mult;
+      booleantest booleantest;
       // declare our fsm
-      fsm selectModCase(#INIT(START),.clk(clk),.rst(rst)) = {START,ADD,SUB,SHL,SHR,SRA,MUL,ERROR};
+      fsm selectModCase(#INIT(START),.clk(clk),.rst(rst)) = {START,ADD,SUB,BOOL,SHL,SHR,SRA,MUL,ERROR};
     }
   }
  
@@ -45,6 +46,7 @@ module masterTest (
     shrTest.button = 0;
     sraTest.button = 0;
     test_mult.button = 0;
+    booleantest.button = 0;
     // depending on our dip selections
     // connect our main button to the button
     if (alufn == b000000){
@@ -64,7 +66,9 @@ module masterTest (
     }   
     else if (alufn == b000010){
       test_mult.button = moduleButton.out;
-    } 
+    } else if (alufn == b011000 | alufn == b011110 | alufn == b010110 | alufn == 011010){
+      booleantest.button = moduleButton.out;
+    }
       
     // connect outputs to the registers 
     s = s_reg.q;
@@ -96,7 +100,9 @@ module masterTest (
         else if (nextMod.out == 1 & alufn == b000010) {
           selectModCase.d = selectModCase.MUL;
         }             
-
+        else if (nextMod.out == 1 & (alufn == b011000 | alufn == b011110 | alufn == b010110 | alufn == 011010)) {
+          selectModCase.d = selectModCase.BOOL;
+        }         
           
         selectModCase.ADD:
         // connect outputs
@@ -146,6 +152,11 @@ module masterTest (
         s_reg.d = test_mult.out;
         flag_reg.d[3] = test_mult.error;
         checkoff_reg.d = test_mult.checkoff;
+        
+        selectModCase.BOOL:
+        s_reg.d = booleantest.s;
+        flag_reg.d[3] = booleantest.flag;
+        checkoff_reg.d = booleantest.checkoff;
                         
     }
   }

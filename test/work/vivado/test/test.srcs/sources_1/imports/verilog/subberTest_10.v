@@ -22,7 +22,7 @@ module subberTest_10 (
   reg [16-1:0] M_fa_x;
   reg [16-1:0] M_fa_y;
   reg [6-1:0] M_fa_op;
-  sixteen_bit_full_adder_16 fa (
+  sixteen_bit_full_adder_17 fa (
     .x(M_fa_x),
     .y(M_fa_y),
     .op(M_fa_op),
@@ -266,18 +266,18 @@ module subberTest_10 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_testCase_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_testCase_q <= M_testCase_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_testCase_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_testCase_q <= M_testCase_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   

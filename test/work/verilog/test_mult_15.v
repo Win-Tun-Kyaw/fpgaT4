@@ -20,7 +20,7 @@ module test_mult_15 (
   wire [16-1:0] M_mult_p;
   reg [16-1:0] M_mult_x;
   reg [16-1:0] M_mult_y;
-  sixteen_bit_multiplier_18 mult (
+  sixteen_bit_multiplier_19 mult (
     .x(M_mult_x),
     .y(M_mult_y),
     .p(M_mult_p)

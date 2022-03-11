@@ -22,7 +22,7 @@ module adderTest_11 (
   reg [16-1:0] M_fa_x;
   reg [16-1:0] M_fa_y;
   reg [6-1:0] M_fa_op;
-  sixteen_bit_full_adder_16 fa (
+  sixteen_bit_full_adder_17 fa (
     .x(M_fa_x),
     .y(M_fa_y),
     .op(M_fa_op),
@@ -257,18 +257,18 @@ module adderTest_11 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_flag_reg_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_flag_reg_q <= M_flag_reg_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_flag_reg_q <= 1'h0;
+      M_checkoff_reg_q <= 1'h0;
     end else begin
-      M_flag_reg_q <= M_flag_reg_d;
+      M_checkoff_reg_q <= M_checkoff_reg_d;
     end
   end
   
@@ -284,9 +284,9 @@ module adderTest_11 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_checkoff_reg_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_checkoff_reg_q <= M_checkoff_reg_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   

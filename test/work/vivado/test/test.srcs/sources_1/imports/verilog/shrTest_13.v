@@ -20,7 +20,7 @@ module shrTest_13 (
   reg [16-1:0] M_shift_x;
   reg [16-1:0] M_shift_y;
   reg [6-1:0] M_shift_op;
-  shifter16_17 shift (
+  shifter16_18 shift (
     .x(M_shift_x),
     .y(M_shift_y),
     .op(M_shift_op),
@@ -217,9 +217,9 @@ module shrTest_13 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_s_reg_q <= 1'h0;
+      M_flag_reg_q <= 1'h0;
     end else begin
-      M_s_reg_q <= M_s_reg_d;
+      M_flag_reg_q <= M_flag_reg_d;
     end
   end
   
@@ -235,9 +235,9 @@ module shrTest_13 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_flag_reg_q <= 1'h0;
+      M_s_reg_q <= 1'h0;
     end else begin
-      M_flag_reg_q <= M_flag_reg_d;
+      M_s_reg_q <= M_s_reg_d;
     end
   end
   

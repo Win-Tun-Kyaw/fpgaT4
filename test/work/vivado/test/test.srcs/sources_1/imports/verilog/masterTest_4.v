@@ -115,16 +115,29 @@ module masterTest_4 (
     .error(M_test_mult_error),
     .checkoff(M_test_mult_checkoff)
   );
-  localparam START_selectModCase = 3'd0;
-  localparam ADD_selectModCase = 3'd1;
-  localparam SUB_selectModCase = 3'd2;
-  localparam SHL_selectModCase = 3'd3;
-  localparam SHR_selectModCase = 3'd4;
-  localparam SRA_selectModCase = 3'd5;
-  localparam MUL_selectModCase = 3'd6;
-  localparam ERROR_selectModCase = 3'd7;
+  wire [16-1:0] M_booleantest_s;
+  wire [6-1:0] M_booleantest_checkoff;
+  wire [1-1:0] M_booleantest_flag;
+  reg [1-1:0] M_booleantest_button;
+  booleantest_16 booleantest (
+    .clk(clk),
+    .rst(rst),
+    .button(M_booleantest_button),
+    .s(M_booleantest_s),
+    .checkoff(M_booleantest_checkoff),
+    .flag(M_booleantest_flag)
+  );
+  localparam START_selectModCase = 4'd0;
+  localparam ADD_selectModCase = 4'd1;
+  localparam SUB_selectModCase = 4'd2;
+  localparam BOOL_selectModCase = 4'd3;
+  localparam SHL_selectModCase = 4'd4;
+  localparam SHR_selectModCase = 4'd5;
+  localparam SRA_selectModCase = 4'd6;
+  localparam MUL_selectModCase = 4'd7;
+  localparam ERROR_selectModCase = 4'd8;
   
-  reg [2:0] M_selectModCase_d, M_selectModCase_q = START_selectModCase;
+  reg [3:0] M_selectModCase_d, M_selectModCase_q = START_selectModCase;
   
   always @* begin
     M_selectModCase_d = M_selectModCase_q;
@@ -140,6 +153,7 @@ module masterTest_4 (
     M_shrTest_button = 1'h0;
     M_sraTest_button = 1'h0;
     M_test_mult_button = 1'h0;
+    M_booleantest_button = 1'h0;
     if (alufn == 6'h00) begin
       M_addertest_button = M_moduleButton_out;
     end else begin
@@ -157,6 +171,10 @@ module masterTest_4 (
             end else begin
               if (alufn == 6'h02) begin
                 M_test_mult_button = M_moduleButton_out;
+              end else begin
+                if (alufn == 6'h18 | alufn == 6'h1e | alufn == 6'h16 | alufn == 14'h2b02) begin
+                  M_booleantest_button = M_moduleButton_out;
+                end
               end
             end
           end
@@ -189,6 +207,10 @@ module masterTest_4 (
                 end else begin
                   if (M_nextMod_out == 1'h1 & alufn == 6'h02) begin
                     M_selectModCase_d = MUL_selectModCase;
+                  end else begin
+                    if (M_nextMod_out == 1'h1 & (alufn == 6'h18 | alufn == 6'h1e | alufn == 6'h16 | alufn == 14'h2b02)) begin
+                      M_selectModCase_d = BOOL_selectModCase;
+                    end
                   end
                 end
               end
@@ -228,6 +250,11 @@ module masterTest_4 (
         M_flag_reg_d[3+0-:1] = M_test_mult_error;
         M_checkoff_reg_d = M_test_mult_checkoff;
       end
+      BOOL_selectModCase: begin
+        M_s_reg_d = M_booleantest_s;
+        M_flag_reg_d[3+0-:1] = M_booleantest_flag;
+        M_checkoff_reg_d = M_booleantest_checkoff;
+      end
     endcase
   end
   
@@ -236,6 +263,15 @@ module masterTest_4 (
       M_s_reg_q <= 1'h0;
     end else begin
       M_s_reg_q <= M_s_reg_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_selectModCase_q <= 1'h0;
+    end else begin
+      M_selectModCase_q <= M_selectModCase_d;
     end
   end
   
@@ -254,15 +290,6 @@ module masterTest_4 (
       M_checkoff_reg_q <= 1'h0;
     end else begin
       M_checkoff_reg_q <= M_checkoff_reg_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_selectModCase_q <= 1'h0;
-    end else begin
-      M_selectModCase_q <= M_selectModCase_d;
     end
   end
   

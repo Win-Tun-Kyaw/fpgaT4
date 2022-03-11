@@ -4,9 +4,11 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module shifter16_17 (
-    input [15:0] x,
-    input [15:0] y,
+module boolean_10 (
+    input clk,
+    input rst,
+    input [15:0] a,
+    input [15:0] b,
     input [5:0] op,
     output reg [15:0] s
   );
@@ -14,17 +16,20 @@ module shifter16_17 (
   
   
   always @* begin
-    s = x;
+    s = 1'h0;
     
-    case (op[0+1-:2])
-      1'h0: begin
-        s = x << y[0+3-:4];
+    case (op[0+3-:4])
+      4'h8: begin
+        s = a & b;
       end
-      1'h1: begin
-        s = x >> y[0+3-:4];
+      4'he: begin
+        s = a | b;
       end
-      2'h3: begin
-        s = $signed(x) >>> y[0+3-:4];
+      3'h6: begin
+        s = a ^ b;
+      end
+      4'ha: begin
+        s = a;
       end
     endcase
   end

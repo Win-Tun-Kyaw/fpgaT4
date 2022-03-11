@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Tue Mar  8 19:34:07 2022
+| Date         : Fri Mar 11 11:41:59 2022
 | Host         : DESKTOP-1I22819 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file au_top_0_control_sets_placed.rpt
 | Design       : au_top_0
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    13 |
-|    Minimum number of control sets                        |    13 |
+| Total control sets                                       |    14 |
+|    Minimum number of control sets                        |    14 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    52 |
+| Unused register locations in slices containing registers |    50 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    13 |
+| Total control sets |    14 |
 | >= 0 to < 4        |     1 |
 | >= 4 to < 6        |     1 |
 | >= 6 to < 8        |     0 |
-| >= 8 to < 10       |     1 |
-| >= 10 to < 12      |     1 |
+| >= 8 to < 10       |     2 |
+| >= 10 to < 12      |     2 |
 | >= 12 to < 14      |     2 |
 | >= 14 to < 16      |     1 |
-| >= 16              |     6 |
+| >= 16              |     5 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,34 +58,35 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              12 |            6 |
+| No           | No                    | No                     |              13 |            7 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              94 |           29 |
+| No           | Yes                   | No                     |             125 |           48 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             154 |           47 |
+| Yes          | Yes                   | No                     |             148 |           35 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------+------------------------------------------------------+-------------------------------------------------------+------------------+----------------+--------------+
-|  Clock Signal  |                     Enable Signal                    |                    Set/Reset Signal                   | Slice Load Count | Bel Load Count | Bels / Slice |
-+----------------+------------------------------------------------------+-------------------------------------------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG | masterTest/M_flag_reg_q[2]_i_1__0_n_0                | reset_cond/Q[0]                                       |                2 |              3 |         1.50 |
-|  clk_IBUF_BUFG |                                                      | reset_cond/M_reset_cond_in                            |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG | masterTest/test_mult/mult/E[0]                       | reset_cond/Q[0]                                       |                4 |              8 |         2.00 |
-|  clk_IBUF_BUFG | masterTest/shlTest/M_s_reg_q[15]_i_1__3_n_0          | reset_cond/Q[0]                                       |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG |                                                      |                                                       |                6 |             12 |         2.00 |
-|  clk_IBUF_BUFG | masterTest/shrTest/M_s_reg_q[14]_i_1__2_n_0          | reset_cond/Q[0]                                       |                2 |             13 |         6.50 |
-|  clk_IBUF_BUFG | masterTest/sraTest/M_s_reg_q[15]_i_1__1_n_0          | reset_cond/Q[0]                                       |                3 |             14 |         4.67 |
-|  clk_IBUF_BUFG | buttoncond_gen_0[0].buttoncond/M_ctr_q[0]_i_2__0_n_0 | buttoncond_gen_0[0].buttoncond/sync/M_pipe_q_reg[1]_0 |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG | buttoncond_gen_0[1].buttoncond/sel                   | buttoncond_gen_0[1].buttoncond/sync/clear             |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG | masterTest/addertest/M_flag_reg_q[3]_i_1__0_n_0      | reset_cond/Q[0]                                       |                7 |             20 |         2.86 |
-|  clk_IBUF_BUFG | masterTest/subberTest/M_flag_reg_q[3]_i_1_n_0        | reset_cond/Q[0]                                       |                7 |             20 |         2.86 |
-|  clk_IBUF_BUFG | masterTest/M_checkoff_reg_q[7]_i_1__4_n_0            | reset_cond/Q[0]                                       |                9 |             25 |         2.78 |
-|  clk_IBUF_BUFG |                                                      | reset_cond/Q[0]                                       |               27 |             90 |         3.33 |
-+----------------+------------------------------------------------------+-------------------------------------------------------+------------------+----------------+--------------+
++----------------+-------------------------------------------------+-------------------------------------------------------+------------------+----------------+--------------+
+|  Clock Signal  |                  Enable Signal                  |                    Set/Reset Signal                   | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+-------------------------------------------------+-------------------------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG | masterTest/M_flag_reg_q[2]_i_1__1_n_0           | reset_cond/Q[0]                                       |                2 |              3 |         1.50 |
+|  clk_IBUF_BUFG |                                                 | reset_cond/M_reset_cond_in                            |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG | masterTest/test_mult/mult/E[0]                  | reset_cond/Q[0]                                       |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | masterTest/booleantest/edge_detector/E[0]       | reset_cond/Q[0]                                       |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | masterTest/booleantest/M_s_reg_q[15]_i_1__3_n_0 | reset_cond/Q[0]                                       |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG | masterTest/shlTest/M_s_reg_q[15]_i_1__1_n_0     | reset_cond/Q[0]                                       |                2 |             11 |         5.50 |
+|  clk_IBUF_BUFG |                                                 |                                                       |                7 |             13 |         1.86 |
+|  clk_IBUF_BUFG | masterTest/shrTest/M_s_reg_q[14]_i_1__2_n_0     | reset_cond/Q[0]                                       |                2 |             13 |         6.50 |
+|  clk_IBUF_BUFG | masterTest/sraTest/M_s_reg_q[15]_i_1__2_n_0     | reset_cond/Q[0]                                       |                2 |             14 |         7.00 |
+|  clk_IBUF_BUFG | masterTest/subberTest/M_flag_reg_q[3]_i_1_n_0   | reset_cond/Q[0]                                       |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | buttoncond_gen_0[0].buttoncond/M_ctr_q_reg[6]_0 | buttoncond_gen_0[0].buttoncond/sync/M_pipe_q_reg[1]_0 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | buttoncond_gen_0[1].buttoncond/sel              | buttoncond_gen_0[1].buttoncond/sync/clear             |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG | masterTest/addertest/M_flag_reg_q[3]_i_1__0_n_0 | reset_cond/Q[0]                                       |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG |                                                 | reset_cond/Q[0]                                       |               46 |            121 |         2.63 |
++----------------+-------------------------------------------------+-------------------------------------------------------+------------------+----------------+--------------+
 
 

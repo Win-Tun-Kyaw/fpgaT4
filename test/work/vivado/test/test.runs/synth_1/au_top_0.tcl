@@ -85,6 +85,8 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/adderTest_11.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/boolean_20.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/booleantest_16.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/button_conditioner_2.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/counter_6.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/decoder_8.v}
@@ -94,11 +96,11 @@ read_verilog -library xil_defaultlib {
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/pipeline_5.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/reset_conditioner_1.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/seven_seg_7.v}
-  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_17.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shifter16_18.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shlTest_12.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/shrTest_13.v}
-  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_16.v}
-  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_multiplier_18.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_17.v}
+  {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sixteen_bit_multiplier_19.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/sraTest_14.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/subberTest_10.v}
   {C:/Users/cajhm/OneDrive - Singapore University of Technology and Design/Y2T4/comp struct 50.002/fpgaT4/test/work/vivado/test/test.srcs/sources_1/imports/verilog/test_mult_15.v}
