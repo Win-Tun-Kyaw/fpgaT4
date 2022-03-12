@@ -1,0 +1,383 @@
+module alu_test (
+    input clk,  // clock
+    input rst,  // reset
+    input button,
+    output checkoff[8], // is current correct????
+    output flag[4], // output the flags for this error
+    output s[16] // output of sum value, 
+   ) {
+    alu alu;
+    .clk(clk) {
+      edge_detector edge_detector(#RISE(1), #FALL(0));
+      .rst(rst) {
+        dff checkoff_reg[8](#INIT(0), .clk(clk), .rst(rst));
+        dff flag_reg[4](#INIT(0), .clk(clk), .rst(rst));
+        dff s_reg[16](#INIT(0), .clk(clk), .rst(rst)); 
+        fsm testCase(#INIT(START), .clk(clk), .rst(rst)) = {START,ADD1,ADD2,ADD3,ADD4,SUB1,SUB2,SUB3,SUB4,MUL1,MUL2,MUL3,MUL4,AND,OR,XOR,A,
+                                                             SHL,SHR,SRA,END,ERROR_STATE}; //TODO: add compare states
+      }
+    }
+ 
+  always {
+    alu.op = 0;
+    alu.x = 0;
+    alu.y = 0; 
+    
+    checkoff = checkoff_reg.q;
+    flag = flag_reg.q;
+    s = s_reg.q;
+    
+    edge_detector.in = button;
+    
+case (testCase.q) {
+        testCase.START:
+        flag_reg.d = 8h00;
+        // we want to print something to show that we are in the correct component
+        s_reg.d = 16h0000;
+        checkoff_reg.d = 16h0000;
+        // edge_detector sees we have pressed the button
+        if (edge_detector.out == 1) { //start auto alu tester
+          testCase.d = testCase.ADD1;
+    }
+        
+        //*********************************ADDER********************************************//
+      testCase.ADD1:
+      alu.op = b000000;
+      alu.x = 16h5e94;
+      alu.y = 16h132f;
+        
+      checkoff_reg.d[7] = 1;
+      flag_reg.d[3] = (alu.z != 0);
+      flag_reg.d[2] = (alu.v != 0);
+      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[0] = (alu.out != 16h71c3);
+      s_reg.d = alu.out;
+        if (alu.out==16h71c3 & alu.z==0 & alu.v==0 & alu.n==0){
+          testCase.d = testCase.ADD2;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+      
+      testCase.ADD2:
+      alu.op = b000000;
+      alu.x = 16h000f;
+      alu.y = 16hffec;
+        
+      checkoff_reg.d[6] = 1;
+      flag_reg.d[3] = (alu.z != 0);
+      flag_reg.d[2] = (alu.v != 0);
+      flag_reg.d[1] = (alu.n != 1);
+      flag_reg.d[0] = (alu.out != 16hfffb);
+      s_reg.d = alu.out;
+        if (alu.out==16hfffb & alu.z==0 & alu.v==0 & alu.n==1){
+          testCase.d = testCase.ADD3;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+       
+      testCase.ADD3:
+      alu.op = b000000;
+      alu.x = 0;
+      alu.y = 0;
+        
+      checkoff_reg.d[5] = 1;
+      flag_reg.d[3] = (alu.z != 1);
+      flag_reg.d[2] = (alu.v != 0);
+      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[0] = (alu.out != 0);
+      s_reg.d = alu.out;
+        if (alu.out==0 & alu.z==1 & alu.v==0 & alu.n==0){
+          testCase.d = testCase.ADD4;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }          
+        
+      testCase.ADD4:
+      alu.op = b000000;
+      alu.x = 16h0001;
+      alu.y = 16h7FFF;
+        
+      checkoff_reg.d[4] = 1;
+      flag_reg.d[3] = (alu.z != 0);
+      flag_reg.d[2] = (alu.v != 1);
+      flag_reg.d[1] = (alu.n != 1);
+      flag_reg.d[0] = (alu.out != 16h8000);
+      s_reg.d = alu.out;
+        if (alu.out==16h8000 & alu.z==0 & alu.v==1 & alu.n==1){
+          testCase.d = testCase.SUB1;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }  
+        
+      //*********************************SUBBER********************************************//
+      testCase.SUB1:
+      alu.op = b000001;
+      alu.x = 16h4f34;
+      alu.y = 16h2321;
+        
+      checkoff_reg.d[7] = 1;
+      flag_reg.d[3] = (alu.z != 0);
+      flag_reg.d[2] = (alu.v != 0);
+      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[0] = (alu.out != 16h2c13);
+      s_reg.d = alu.out;
+        if (alu.out==16h2c13 & alu.z==0 & alu.v==0 & alu.n==0){
+          testCase.d = testCase.SUB2;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+      
+      testCase.SUB2:
+      alu.op = b000001;
+      alu.x = 16hfff0;
+      alu.y = 16h0001;
+        
+      checkoff_reg.d[6] = 1;
+      flag_reg.d[3] = (alu.z != 0);
+      flag_reg.d[2] = (alu.v != 0);
+      flag_reg.d[1] = (alu.n != 1);
+      flag_reg.d[0] = (alu.out != 16hffef);
+      s_reg.d = alu.out;
+        if (alu.out==16hffef & alu.z==0 & alu.v==0 & alu.n==1){
+          testCase.d = testCase.SUB3;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+       
+      testCase.SUB3:
+      alu.op = b000001;
+      alu.x = 16hc001;
+      alu.y = 16hc001;
+        
+      checkoff_reg.d[5] = 1;
+      flag_reg.d[3] = (alu.z != 1);
+      flag_reg.d[2] = (alu.v != 0);
+      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[0] = (alu.out != 0);
+      s_reg.d = alu.out;
+        if (alu.out==0 & alu.z==1 & alu.v==0 & alu.n==0){
+          testCase.d = testCase.SUB4;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }          
+        
+      testCase.SUB4:
+      alu.op = b000001;
+      alu.x = 16h9f22;
+      alu.y = 16h2ff3;
+        
+      checkoff_reg.d[4] = 1;
+      flag_reg.d[3] = (alu.z != 0);
+      flag_reg.d[2] = (alu.v != 1);
+      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[0] = (alu.out != 16h6f2f);
+      s_reg.d = alu.out;
+        if (alu.out==16h6f2f & alu.z==0 & alu.v==1 & alu.n==0){
+          testCase.d = testCase.MUL1;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }  
+        
+        //*********************************MULTIPLIER********************************************//
+      testCase.MUL1:
+      alu.op = b000010;
+      alu.x = 16h0005;
+      alu.y = 16h0000;
+        
+      checkoff_reg.d[7] = 1;
+      flag_reg.d[0] = (alu.out != 16h0000);
+      s_reg.d = alu.out;
+        if (alu.out==16h0000){
+          testCase.d = testCase.MUL2;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+      
+      testCase.MUL2:
+      alu.op = b000010;
+      alu.x = 16h0005;
+      alu.y = 16h0005;
+        
+      checkoff_reg.d[6] = 1;
+      flag_reg.d[0] = (alu.out != 16h0019);
+      s_reg.d = alu.out;
+        if (alu.out==16h0019){
+          testCase.d = testCase.MUL3;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+       
+      testCase.MUL3:
+      alu.op = b000010;
+      alu.x = 16h0005;
+      alu.y = 16hffff;
+        
+      checkoff_reg.d[5] = 1;
+      flag_reg.d[0] = (alu.out != 16hfffb);
+      s_reg.d = alu.out;
+        if (alu.out==16hfffb){
+          testCase.d = testCase.MUL4;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }          
+        
+      testCase.MUL4:
+      alu.op = b000010;
+      alu.x = 16hffff;
+      alu.y = 16hfff0;
+        
+      checkoff_reg.d[4] = 1;
+      flag_reg.d[0] = (alu.out != 16h0010);
+      s_reg.d = alu.out;
+        if (alu.out==16h0010){
+          testCase.d = testCase.MUL1;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }       
+        
+        //*********************************BOOLEAN********************************************//
+        
+      testCase.AND:
+      alu.op = b011000;
+      alu.x = 16b0110100001010111;
+      alu.y = 16b1010110000001000;
+        
+      checkoff_reg.d[7] = 1;
+      flag_reg.d[0] = (alu.out != 16h2800);
+      s_reg.d = alu.out;
+        if (alu.out==16h2800){
+          testCase.d = testCase.OR;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+      
+      testCase.OR:
+      alu.op = b011110;
+      alu.x = 16b0110100001010111;
+      alu.y = 16b1010110000001000;
+        
+      checkoff_reg.d[6] = 1;
+      flag_reg.d[0] = (alu.out != 16hec5f);
+      s_reg.d = alu.out;
+        if (alu.out==16hec5f){
+          testCase.d = testCase.XOR;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+       
+      testCase.XOR:
+      alu.op = b010110;
+      alu.x = 16b0110100001010111;
+      alu.y = 16b1010110000001000;
+        
+      checkoff_reg.d[5] = 1;
+      flag_reg.d[0] = (alu.out != 16hc45f);
+      s_reg.d = alu.out;
+        if (alu.out==16hc45f){
+          testCase.d = testCase.A;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }          
+        
+      testCase.A:
+      alu.op = 011010;
+      alu.x = 16b0110100001010111;
+      alu.y = 16b1010110000001000;
+        
+      checkoff_reg.d[4] = 1;
+      flag_reg.d[0] = (alu.out != 16h6857);
+      s_reg.d = alu.out;
+        if (alu.out==16h6857){
+          testCase.d = testCase.SHL;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    } 
+        
+        //*********************************SHIFT LEFT********************************************//
+        
+      testCase.SHL:
+      alu.op = b100000;
+      alu.x = 16hf001;
+      alu.y = 16h0008;
+        
+      checkoff_reg.d[7] = 1;
+      flag_reg.d[0] = (alu.out != 16h0100);
+      s_reg.d = alu.out;
+        if (alu.out==16h0100){
+          testCase.d = testCase.SHR;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+      
+        //*********************************SHIFT RIGHT********************************************//
+      testCase.SHR:
+      alu.op = b100001;
+      alu.x = 16hf001;
+      alu.y = 16h0008;
+        
+      checkoff_reg.d[6] = 1;
+      flag_reg.d[0] = (alu.out != 16h00f0);
+      s_reg.d = alu.out;
+        if (alu.out==16h00f0){
+          testCase.d = testCase.SRA;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }
+       
+        //*********************************SHIFT RIGHT SIGNED********************************************//
+      testCase.SRA:
+      alu.op = b100011;
+      alu.x = 16hf001;
+      alu.y = 16h0008;
+        
+      checkoff_reg.d[5] = 1;
+      flag_reg.d[0] = (alu.out != 16hfff0);
+      s_reg.d = alu.out;
+        if (alu.out==16hfff0){
+          testCase.d = testCase.A;
+  }        
+        else{
+        testCase.d = testCase.ERROR_STATE;
+    }          
+        
+        //*********************************COMPARE********************************************//
+                          // TODO
+        
+      //*********************************FINISHED********************************************//
+ 
+      testCase.END:
+      flag_reg.d = 8hff;
+      checkoff_reg.d = 8hff;
+      s_reg.d =16hc001;
+      s = s_reg.q;
+      flag = flag_reg.q;
+      checkoff = checkoff_reg.q;
+        if (edge_detector.out == 1) { 
+          testCase.d = testCase.START; //restart
+  }       
+        
+        //*********************************ERROR STATE********************************************//
+        
+      testCase.ERROR_STATE: 
+      s_reg.d =16hc001;
+        if (edge_detector.out == 1) { 
+          testCase.d = testCase.END;
+    }

@@ -1,0 +1,53 @@
+module alu (
+    input x[16],
+    input y[16],
+    input op[6],
+    output out[16],
+    output z[1],
+    output v[1],
+    output n[1]
+  ) {
+  
+  sixteen_bit_full_adder adder;
+  shifter16 shifter;
+  boolean boolean;
+  //compare compare;
+  sixteen_bit_multiplier multiplier;
+
+  always {
+    adder.op = op;
+    adder.x = x;
+    adder.y = y;
+    
+    z = adder.z;
+    v = adder.v;
+    n = adder.n;
+    
+    //compare.op = op;
+    //compare.z = z;
+    //compare.v = v;
+    //compare.n = n;
+    
+    boolean.op = op;
+    boolean.a = x;
+    boolean.b = y;
+    
+    shifter.op = op;
+    shifter.x = x;
+    shifter.y = y;
+    
+    multiplier.x = x;
+    multiplier.y = y;
+    
+    case(op[5:4]){
+      b00 : out = adder.s;
+      b01 : out = boolean.s ;
+      b10 : out = shifter.s;
+      //b11 : out = compare.s ;
+      default : out = 16b0;
+  }
+    
+    if (op == b000010){
+      out = multiplier.p;
+      
+}
