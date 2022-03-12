@@ -1,5 +1,5 @@
 # fpgaT4
-## controls
+### controls
 Use the right dip switch bank, switches 1 to 6 to select ALUFN
 
 Use the top [0] io button to start the fsm tester for that particular ALUFN
