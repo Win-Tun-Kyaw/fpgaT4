@@ -3,9 +3,7 @@ module alu (
     input y[16],
     input op[6],
     output out[16],
-    output z[1],
-    output v[1],
-    output n[1]
+    output zvn[3]
   ) {
   
   sixteen_bit_full_adder adder;
@@ -13,6 +11,10 @@ module alu (
   boolean boolean;
   //compare compare;
   sixteen_bit_multiplier multiplier;
+  
+  sig z;
+  sig v;
+  sig n;
 
   always {
     adder.op = op;
@@ -22,6 +24,10 @@ module alu (
     z = adder.z;
     v = adder.v;
     n = adder.n;
+    
+    zvn[0] = z;
+    zvn[1] = v;
+    zvn[2] = n;
     
     //compare.op = op;
     //compare.z = z;
