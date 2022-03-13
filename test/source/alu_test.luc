@@ -47,12 +47,12 @@ case (testCase.q) {
       alu.y = 16h132f;
         
       checkoff_reg.d[7] = 1;
-      flag_reg.d[3] = (alu.z != 0);
-      flag_reg.d[2] = (alu.v != 0);
-      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[3] = (alu.zvn[0] != 0);
+      flag_reg.d[2] = (alu.zvn[1] != 0);
+      flag_reg.d[1] = (alu.zvn[2] != 0);
       flag_reg.d[0] = (alu.out != 16h71c3);
       s_reg.d = alu.out;
-        if (alu.out==16h71c3 & alu.z==0 & alu.v==0 & alu.n==0){
+        if (alu.out==16h71c3 & alu.zvn==000){
           testCase.d = testCase.ADD2;
   }        
         else{
@@ -65,12 +65,12 @@ case (testCase.q) {
       alu.y = 16hffec;
         
       checkoff_reg.d[6] = 1;
-      flag_reg.d[3] = (alu.z != 0);
-      flag_reg.d[2] = (alu.v != 0);
-      flag_reg.d[1] = (alu.n != 1);
+      flag_reg.d[3] = (alu.zvn[0] != 0);
+      flag_reg.d[2] = (alu.zvn[1] != 0);
+      flag_reg.d[1] = (alu.zvn[2] != 1);
       flag_reg.d[0] = (alu.out != 16hfffb);
       s_reg.d = alu.out;
-        if (alu.out==16hfffb & alu.z==0 & alu.v==0 & alu.n==1){
+        if (alu.out==16hfffb & alu.zvn==001){
           testCase.d = testCase.ADD3;
   }        
         else{
@@ -83,12 +83,12 @@ case (testCase.q) {
       alu.y = 0;
         
       checkoff_reg.d[5] = 1;
-      flag_reg.d[3] = (alu.z != 1);
-      flag_reg.d[2] = (alu.v != 0);
-      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[3] = (alu.zvn[0] != 1);
+      flag_reg.d[2] = (alu.zvn[1] != 0);
+      flag_reg.d[1] = (alu.zvn[2] != 0);
       flag_reg.d[0] = (alu.out != 0);
       s_reg.d = alu.out;
-        if (alu.out==0 & alu.z==1 & alu.v==0 & alu.n==0){
+        if (alu.out==0 & alu.zvn==100){
           testCase.d = testCase.ADD4;
   }        
         else{
@@ -101,12 +101,12 @@ case (testCase.q) {
       alu.y = 16h7FFF;
         
       checkoff_reg.d[4] = 1;
-      flag_reg.d[3] = (alu.z != 0);
-      flag_reg.d[2] = (alu.v != 1);
-      flag_reg.d[1] = (alu.n != 1);
+      flag_reg.d[3] = (alu.zvn[0] != 0);
+      flag_reg.d[2] = (alu.zvn[1] != 1);
+      flag_reg.d[1] = (alu.zvn[2] != 1);
       flag_reg.d[0] = (alu.out != 16h8000);
       s_reg.d = alu.out;
-        if (alu.out==16h8000 & alu.z==0 & alu.v==1 & alu.n==1){
+        if (alu.out==16h8000 & alu.zvn==011){
           testCase.d = testCase.SUB1;
   }        
         else{
@@ -120,12 +120,12 @@ case (testCase.q) {
       alu.y = 16h2321;
         
       checkoff_reg.d[7] = 1;
-      flag_reg.d[3] = (alu.z != 0);
-      flag_reg.d[2] = (alu.v != 0);
-      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[3] = (alu.zvn[0] != 0);
+      flag_reg.d[2] = (alu.zvn[1] != 0);
+      flag_reg.d[1] = (alu.zvn[2] != 0);
       flag_reg.d[0] = (alu.out != 16h2c13);
       s_reg.d = alu.out;
-        if (alu.out==16h2c13 & alu.z==0 & alu.v==0 & alu.n==0){
+        if (alu.out==16h2c13 & alu.zvn==000){
           testCase.d = testCase.SUB2;
   }        
         else{
@@ -138,12 +138,12 @@ case (testCase.q) {
       alu.y = 16h0001;
         
       checkoff_reg.d[6] = 1;
-      flag_reg.d[3] = (alu.z != 0);
-      flag_reg.d[2] = (alu.v != 0);
-      flag_reg.d[1] = (alu.n != 1);
+      flag_reg.d[3] = (alu.zvn[0] != 0);
+      flag_reg.d[2] = (alu.zvn[1] != 0);
+      flag_reg.d[1] = (alu.zvn[2] != 1);
       flag_reg.d[0] = (alu.out != 16hffef);
       s_reg.d = alu.out;
-        if (alu.out==16hffef & alu.z==0 & alu.v==0 & alu.n==1){
+        if (alu.out==16hffef & alu.zvn==001){
           testCase.d = testCase.SUB3;
   }        
         else{
@@ -156,12 +156,12 @@ case (testCase.q) {
       alu.y = 16hc001;
         
       checkoff_reg.d[5] = 1;
-      flag_reg.d[3] = (alu.z != 1);
-      flag_reg.d[2] = (alu.v != 0);
-      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[3] = (alu.zvn[0] != 1);
+      flag_reg.d[2] = (alu.zvn[1] != 0);
+      flag_reg.d[1] = (alu.zvn[2] != 0);
       flag_reg.d[0] = (alu.out != 0);
       s_reg.d = alu.out;
-        if (alu.out==0 & alu.z==1 & alu.v==0 & alu.n==0){
+        if (alu.out==0 & alu.zvn==100){
           testCase.d = testCase.SUB4;
   }        
         else{
@@ -174,12 +174,12 @@ case (testCase.q) {
       alu.y = 16h2ff3;
         
       checkoff_reg.d[4] = 1;
-      flag_reg.d[3] = (alu.z != 0);
-      flag_reg.d[2] = (alu.v != 1);
-      flag_reg.d[1] = (alu.n != 0);
+      flag_reg.d[3] = (alu.zvn[0] != 0);
+      flag_reg.d[2] = (alu.zvn[1] != 1);
+      flag_reg.d[1] = (alu.zvn[2] != 0);
       flag_reg.d[0] = (alu.out != 16h6f2f);
       s_reg.d = alu.out;
-        if (alu.out==16h6f2f & alu.z==0 & alu.v==1 & alu.n==0){
+        if (alu.out==16h6f2f & alu.zvn==010){
           testCase.d = testCase.MUL1;
   }        
         else{
