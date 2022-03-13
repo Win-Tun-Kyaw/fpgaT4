@@ -1,0 +1,117 @@
+module au_top_but_manual (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx,          // USB->Serial output
+    output io_led [3][8],   // LEDs on IO Shield
+    output io_seg [8],      // 7-segment LEDs on IO Shield
+    output io_sel [4],      // Digit select on IO Shield
+    input io_button [5],    // 5 buttons on IO Shield
+    //   0
+    // 3 1 4
+    //   2
+    input io_dip [3][8]     // DIP switches on IO Shield
+  ) {
+  
+      sig rst;   
+      
+      alu alu;         
+      
+    // declare modules
+   .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+    // this module checks if we are pressing any of the 5 io buttons
+
+    .rst(rst){
+      // declare our module to address the segment         
+      multi_seven_seg seg;
+        dff store_a[16](.clk(clk), .rst(rst));  // to store value a
+        dff store_b[16](.clk(clk), .rst(rst));  // to store value b             
+        dff store_alufn[6](.clk(clk), .rst(rst));  // to store value alufn 
+      fsm manualTest (.clk(clk), .rst(rst)) = {START, INPUT_A, INPUT_B, INPUT_ALUFN, END, AUTO}; 
+      // declare our test module
+      alu_test alu_test;
+    }
+  }
+
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    usb_tx = usb_rx;        // loop serial port
+    
+    led = 8h00;             // turn LEDs off
+    io_led = 3x{{8h00}};    // turn io LEDs off 
+    
+    alu.op = 0;
+    alu.x = 0;
+    alu.y = 0;
+    alu_test.button = 0;
+    
+     // connect s output to segment's values
+     //seg.values = {4he,4hf,4hc,4hd};
+     seg.values = {alu_test.s[15:12],alu_test.s[11:8],alu_test.s[7:4],alu_test.s[3:0]};
+     io_seg = ~seg.seg;          //  select needed segments, we do bitwise inversion as 0 indicates selected segment
+     io_sel = ~seg.sel;           // select all needed digits
+    
+    case (manualTest.q) {
+      manualTest.START:
+      if (io_button[0]==1){   //press top button
+        manualTest.d = manualTest.INPUT_A;
+        }
+        
+      manualTest.INPUT_A:
+      io_led[1] = io_dip[1];
+      io_led[0] = io_dip[0];
+      store_a.d = c{io_dip[1][7:0], io_dip[0][7:0]};
+      if (io_button[3]==1){      //press left button
+        manualTest.d = manualTest.INPUT_B;
+        }
+      else if (io_button[0]==1){     //press top again to reset
+        manualTest.d = manualTest.START;
+        }
+        
+      manualTest.INPUT_B:
+      io_led[1] = io_dip[1];
+      io_led[0] = io_dip[0];
+      store_b.d = c{io_dip[1][7:0], io_dip[0][7:0]};
+      if (io_button[4]==1){         //press right button
+        manualTest.d = manualTest.INPUT_ALUFN;
+        }
+      else if (io_button[3]==1){     //left again to reset
+        manualTest.d = manualTest.START;
+        }
+
+      manualTest.INPUT_ALUFN:
+      io_led[2][5:0] = io_dip[2][5:0];
+      store_alufn.d = io_dip[2][5:0];
+      if (io_button[2]==1){       //press bottom button
+        manualTest.d = manualTest.END;
+        }
+      else if (io_button[4]==1){       //right again to reset
+        manualTest.d = manualTest.START;
+        }
+        
+      manualTest.END:
+      alu.x = store_a.q;
+      alu.y = store_b.q;
+      alu.op = store_alufn.q;
+      io_led[2][2] = alu.zvn[0];
+      io_led[2][1] = alu.zvn[1];
+      io_led[2][0] = alu.zvn[2];
+      io_led[1] = alu.out[15:8];
+      io_led[0] = alu.out[7:0];
+      if (io_button[1]==1){         //press middle button to start auto tester
+        manualTest.d = manualTest.AUTO;
+        }
+      else if (io_button[2]==1){          //press bottom again to reset
+        manualTest.d = manualTest.START;
+        }
+        
+      manualTest.AUTO:
+      alu_test.button = 1;
+      
+  }
+}
